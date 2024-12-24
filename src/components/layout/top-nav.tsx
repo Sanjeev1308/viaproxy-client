@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import { Link } from 'react-router-dom';
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,7 +5,9 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { cn } from '@/lib/utils';
 import { MenuIcon } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface TopNavProps extends React.HTMLAttributes<HTMLElement> {
   links: {
@@ -30,7 +29,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent side="bottom" align="start">
-            {links.map(({ title, href, isActive, disabled }) => (
+            {links.map(({ title, href, isActive }) => (
               <DropdownMenuItem key={`${title}-${href}`} asChild>
                 <Link
                   to={href}
@@ -46,7 +45,7 @@ export function TopNav({ className, links, ...props }: TopNavProps) {
       </div>
 
       <nav className={cn('hidden items-center space-x-4 md:flex lg:space-x-6', className)} {...props}>
-        {links.map(({ title, href, isActive, disabled }) => (
+        {links.map(({ title, href, isActive }) => (
           <Link
             key={`${title}-${href}`}
             to={href}

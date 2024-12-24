@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Row } from '@tanstack/react-table';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -10,13 +9,14 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Row } from '@tanstack/react-table';
 import { Edit, MoreHorizontal, Trash } from 'lucide-react';
 
 interface DataTableRowActionsProps {
   row: Row<any>;
 }
 
-export function DataTableRowActions({ row }: DataTableRowActionsProps) {
+export function DataTableRowActions() {
   return (
     <>
       <DropdownMenu modal={false}>

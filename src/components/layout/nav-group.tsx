@@ -1,4 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@/components/ui/collapsible';
 import {
   SidebarGroup,
@@ -23,9 +24,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
-import { NavCollapsible, NavItem, NavLink, type NavGroup } from './types';
+import { NavCollapsible, NavItem, NavLink } from './types';
 
-export function NavGroup({ title, items }: NavGroup) {
+export function NavGroup({ title, items }: any) {
   const { state } = useSidebar();
   const { pathname } = useLocation();
 
@@ -33,7 +34,7 @@ export function NavGroup({ title, items }: NavGroup) {
     <SidebarGroup>
       <SidebarGroupLabel>{title}</SidebarGroupLabel>
       <SidebarMenu>
-        {items.map((item) => {
+        {items.map((item: any) => {
           const key = `${item.title}-${item.url}`;
 
           if (!item.items) return <SidebarMenuLink key={key} item={item} href={pathname} />;
@@ -69,7 +70,7 @@ const SidebarMenuLink = ({ item, href }: { item: NavLink; href: string }) => {
 const SidebarMenuCollapsible = ({ item, href }: { item: NavCollapsible; href: string }) => {
   const { setOpenMobile } = useSidebar();
   return (
-    <Collapsible asChild defaultOpen={checkIsActive(href, item, true)} className="group/collapsible">
+    <Collapsible asChild defaultOpen={checkIsActive(href, item)} className="group/collapsible">
       <SidebarMenuItem>
         <CollapsibleTrigger asChild>
           <SidebarMenuButton tooltip={item.title}>
@@ -131,7 +132,7 @@ const SidebarMenuCollapsedDropdown = ({ item, href }: { item: NavCollapsible; hr
   );
 };
 
-function checkIsActive(href: string, item: NavItem, mainNav = false) {
+function checkIsActive(href: string, item: NavItem) {
   return (
     href === item.url || // /endpint?search=param
     href.split('?')[0] === item.url || // endpoint

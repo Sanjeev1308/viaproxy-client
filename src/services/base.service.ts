@@ -47,7 +47,7 @@ export abstract class BaseService implements Client {
   static handleError(error: AxiosError) {
     const errorModel: ErrorModel = { name: 'Error', message: 'Something went wrong!' };
     if (error.response) {
-      if (error.response.data) errorModel.message = error.response.data?.message;
+      if (error.response.data) errorModel.message = (error as any).response.data?.message;
     }
     return Promise.reject(errorModel);
   }
