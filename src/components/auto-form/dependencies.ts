@@ -1,11 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { FieldValues, UseFormWatch } from "react-hook-form";
-import { Dependency, DependencyType, EnumValues } from "./types";
-import * as z from "zod";
+import { FieldValues, UseFormWatch } from 'react-hook-form';
+import * as z from 'zod';
+import { Dependency, DependencyType, EnumValues } from './types';
 
-export default function resolveDependencies<
-  SchemaType extends z.infer<z.ZodObject<any, any>>,
->(
+export default function resolveDependencies<SchemaType extends z.infer<z.ZodObject<any, any>>>(
   dependencies: Dependency<SchemaType>[],
   currentFieldName: keyof SchemaType,
   watch: UseFormWatch<FieldValues>,
@@ -17,9 +15,7 @@ export default function resolveDependencies<
 
   const currentFieldValue = watch(currentFieldName as string);
 
-  const currentFieldDependencies = dependencies.filter(
-    (dependency) => dependency.targetField === currentFieldName,
-  );
+  const currentFieldDependencies = dependencies.filter((dependency) => dependency.targetField === currentFieldName);
   for (const dependency of currentFieldDependencies) {
     const watchedValue = watch(dependency.sourceField as string);
 
