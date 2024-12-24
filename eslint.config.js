@@ -28,6 +28,14 @@ export default tseslint.config(
           ignoreRestSiblings: false,
         },
       ],
+      '@typescript-eslint/no-unused-vars': [
+        'warn', // "error" for errors, "warn" for warnings
+        {
+          vars: 'all', // Check all variables
+          args: 'after-used', // Check arguments only after they're used
+          ignoreRestSiblings: false, // Don't ignore rest siblings in destructuring
+        },
+      ],
     },
   },
 );
