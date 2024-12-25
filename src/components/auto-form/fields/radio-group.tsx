@@ -15,6 +15,7 @@ export default function AutoFormRadioGroup({
   fieldProps,
   fieldConfigItem,
 }: AutoFormInputComponentProps) {
+  const { className = 'w-full' } = fieldProps;
   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def.values;
 
   let values: string[] = [];
@@ -25,8 +26,8 @@ export default function AutoFormRadioGroup({
   }
 
   return (
-    <div>
-      <FormItem>
+    <div className={`flex flex-row items-center space-x-2 ${className}`}>
+      <FormItem className="flex w-full flex-col justify-start">
         <AutoFormLabel label={fieldConfigItem?.label || label} isRequired={isRequired} />
         <FormControl>
           <RadioGroup onValueChange={field.onChange} defaultValue={field.value} {...fieldProps}>

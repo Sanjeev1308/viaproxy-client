@@ -11,9 +11,11 @@ export default function AutoFormSwitch({
   fieldConfigItem,
   fieldProps,
 }: AutoFormInputComponentProps) {
+  const { className = 'w-full' } = fieldProps;
+
   return (
-    <div>
-      <FormItem>
+    <div className={`flex flex-row items-center space-x-2 ${className}`}>
+      <FormItem className="flex w-full flex-col justify-start">
         <div className="flex items-center gap-3">
           <FormControl>
             <Switch checked={field.value} onCheckedChange={field.onChange} {...fieldProps} />

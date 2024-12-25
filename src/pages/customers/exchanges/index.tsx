@@ -18,7 +18,7 @@ enum Sports {
   None = "I don't like sports",
 }
 
-const formSchema = z.object({
+const userDetailsSchema = z.object({
   title: z
     .string({
       required_error: 'Title is required.',
@@ -36,6 +36,22 @@ const formSchema = z.object({
       message: 'Password must be at least 8 characters.',
     }),
 
+  birthday: z.coerce.date().optional(),
+
+  bio: z
+    .string()
+    .min(10, {
+      message: 'Bio must be at least 10 characters.',
+    })
+    .max(160, {
+      message: 'Bio must not be longer than 160 characters.',
+    })
+    .optional(),
+
+  sports: z.nativeEnum(Sports).describe('What is your favourite sport?'),
+});
+
+const preferencesSchema = z.object({
   favouriteNumber: z.coerce
     .number({
       invalid_type_error: 'Favourite number must be a number.',
@@ -49,6 +65,14 @@ const formSchema = z.object({
     .default(1)
     .optional(),
 
+  color: z.enum(['red', 'green', 'blue']).optional(),
+
+  marshmallows: z.enum(['not many', 'a few', 'a lot', 'too many']).describe('How many marshmallows fit in your mouth?'),
+
+  sendMeMails: z.boolean().optional(),
+});
+
+const termsAndFileSchema = z.object({
   acceptTerms: z
     .boolean()
     .describe('Accept terms and conditions.')
@@ -56,28 +80,6 @@ const formSchema = z.object({
       message: 'You must accept the terms and conditions.',
       path: ['acceptTerms'],
     }),
-
-  sendMeMails: z.boolean().optional(),
-
-  birthday: z.coerce.date().optional(),
-
-  color: z.enum(['red', 'green', 'blue']).optional(),
-
-  // Another enum example
-  marshmallows: z.enum(['not many', 'a few', 'a lot', 'too many']).describe('How many marshmallows fit in your mouth?'),
-
-  // Native enum example
-  sports: z.nativeEnum(Sports).describe('What is your favourite sport?'),
-
-  bio: z
-    .string()
-    .min(10, {
-      message: 'Bio must be at least 10 characters.',
-    })
-    .max(160, {
-      message: 'Bio must not be longer than 30 characters.',
-    })
-    .optional(),
 
   customParent: z.string().optional(),
 
@@ -89,8 +91,9 @@ export function NewExchange() {
   const { mutateAsync, isLoading } = useLogin();
 
   const handleSubmit = async (data: any) => {
-    await mutateAsync(data);
-    navigate('/');
+    // await mutateAsync(data);
+    // navigate('/');
+    console.log('lll', data);
   };
 
   return (
@@ -113,7 +116,7 @@ export function NewExchange() {
 
             <CardContent>
               <AutoForm
-                formSchema={formSchema}
+                formSchema={[userDetailsSchema, preferencesSchema, termsAndFileSchema]}
                 onSubmit={handleSubmit}
                 fieldConfig={{
                   password: {
@@ -177,10 +180,25 @@ export function NewExchange() {
                     fieldType: 'file',
                   },
                 }}
+                multiFormInfo={{
+                  layout: 'multi-step',
+                  items: [
+                    {
+                      title: 'User Info',
+                      schema: userDetailsSchema,
+                    },
+                    {
+                      title: 'Prefernace Info',
+                      schema: preferencesSchema,
+                    },
+                    {
+                      title: 'Terms And File',
+                      schema: termsAndFileSchema,
+                    },
+                  ],
+                }}
               >
-                <AutoFormSubmit className="w-full" disabled={isLoading}>
-                  Login
-                </AutoFormSubmit>
+                <AutoFormSubmit disabled={isLoading}>Sumbit</AutoFormSubmit>
               </AutoForm>
             </CardContent>
           </Card>

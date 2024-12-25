@@ -11,15 +11,19 @@ export default function AutoFormDate({
   fieldConfigItem,
   fieldProps,
 }: AutoFormInputComponentProps) {
-  return (
-    <FormItem>
-      <AutoFormLabel label={fieldConfigItem?.label || label} isRequired={isRequired} />
-      <FormControl>
-        <DatePicker date={field.value} setDate={field.onChange} {...fieldProps} />
-      </FormControl>
-      <AutoFormTooltip fieldConfigItem={fieldConfigItem} />
+  const { className = 'w-full' } = fieldProps;
 
-      <FormMessage />
-    </FormItem>
+  return (
+    <div className={`${className}`}>
+      <FormItem>
+        <AutoFormLabel label={fieldConfigItem?.label || label} isRequired={isRequired} />
+        <FormControl>
+          <DatePicker date={field.value} setDate={field.onChange} {...fieldProps} />
+        </FormControl>
+        <AutoFormTooltip fieldConfigItem={fieldConfigItem} />
+
+        <FormMessage />
+      </FormItem>
+    </div>
   );
 }

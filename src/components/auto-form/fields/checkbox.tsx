@@ -11,8 +11,10 @@ export default function AutoFormCheckbox({
   fieldConfigItem,
   fieldProps,
 }: AutoFormInputComponentProps) {
+  const { className = 'w-full' } = fieldProps;
+
   return (
-    <div>
+    <div className={`${className}`}>
       <FormItem>
         <div className="mb-3 flex items-center gap-3">
           <FormControl>
