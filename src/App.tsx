@@ -1,10 +1,11 @@
-import './App.css';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { AppSidebar } from '@/components/layout/app-sidebar';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
-import { AppSidebar } from '@/components/layout/app-sidebar';
 import { Outlet } from 'react-router-dom';
+import './App.css';
 
-function App() {
+function App({ children }: any) {
   return (
     <SidebarProvider defaultOpen={true}>
       {/* <SkipToMain /> */}
@@ -19,7 +20,7 @@ function App() {
           'h-svh flex flex-col',
         )}
       >
-        <Outlet />
+        {children ? children : <Outlet />}
       </div>
     </SidebarProvider>
   );

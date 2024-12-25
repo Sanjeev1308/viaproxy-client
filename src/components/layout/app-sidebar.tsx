@@ -1,15 +1,15 @@
-import {
-  Sidebar,
-  SidebarFooter,
-  SidebarRail,
-  SidebarHeader,
-  SidebarContent,
-  SidebarMenuItem,
-  SidebarMenu,
-  SidebarMenuButton,
-} from '@/components/ui/sidebar';
 import { NavGroup } from '@/components/layout/nav-group';
 import { NavUser } from '@/components/layout/nav-user';
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarRail,
+} from '@/components/ui/sidebar';
 import { sidebarData } from './data/sidebar-data';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -34,9 +34,10 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {sidebarData.navGroups.map((props) => (
+        {/* {sidebarData.navGroups.map((props) => (
           <NavGroup key={props.title} {...props} />
-        ))}
+        ))} */}
+        <NavGroup items={sidebarData.navGroups} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={sidebarData.user} />
