@@ -1,4 +1,5 @@
 import Dashboard from '@/pages/customers/dashboard';
+import { NewExchange } from '@/pages/customers/exchanges';
 import Chats from '@/pages/customers/messaging';
 import { Shops } from '@/pages/customers/shops';
 import { Home, MessageCircle, Settings, ShoppingBag } from 'lucide-react';
@@ -69,7 +70,7 @@ export const studentRoutes: IRoutes[] = [
       {
         title: 'B2B Exchanges',
         url: '/student/exchange/b2b-exchanges',
-        content: Shops,
+        content: NewExchange,
       },
       {
         title: 'B2B Sales',

@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { ColumnDef } from '@tanstack/react-table';
-import { cn } from '@/lib/utils';
+import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header';
+import { DataTableRowActions } from '@/components/data-table/data-table-row-actions';
 import { Badge } from '@/components/ui/badge';
 import { Checkbox } from '@/components/ui/checkbox';
+import { cn } from '@/lib/utils';
+import { ColumnDef } from '@tanstack/react-table';
 import { Shop } from './data/schema';
-import { DataTableColumnHeader } from '@/features/exchanges/components/data-table-column-header';
-import { DataTableRowActions } from '@/features/exchanges/components/data-table-row-actions';
 
 export const columns: ColumnDef<Shop>[] = [
   {

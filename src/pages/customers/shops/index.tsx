@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
 import { Header } from '@/components/layout/header';
 import { Main } from '@/components/layout/main';
 import { ProfileDropdown } from '@/components/profile-dropdown';
+import { Button } from '@/components/ui/button';
+import { useState } from 'react';
 
 import { columns } from './shops-columns';
 
-import { Shop, userListSchema } from './data/schema';
-import { DataTable } from '@/features/exchanges/components/data-table';
+import { DataTable } from '@/components/data-table/data-table';
 import { PlusIcon } from 'lucide-react';
+import { Shop, userListSchema } from './data/schema';
 
 export function Shops() {
   // Dialog states
