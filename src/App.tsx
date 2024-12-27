@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { AppSidebar } from '@/components/layout/app-sidebar';
+import { Header } from '@/components/layout/header';
+import { ProfileDropdown } from '@/components/profile-dropdown';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
 import { Outlet } from 'react-router-dom';
@@ -8,7 +10,6 @@ import './App.css';
 function App({ children }: any) {
   return (
     <SidebarProvider defaultOpen={true}>
-      {/* <SkipToMain /> */}
       <AppSidebar />
       <div
         id="content"
@@ -20,6 +21,11 @@ function App({ children }: any) {
           'h-svh flex flex-col',
         )}
       >
+        <Header>
+          <div className="ml-auto flex items-center space-x-4">
+            <ProfileDropdown />
+          </div>
+        </Header>
         {children ? children : <Outlet />}
       </div>
     </SidebarProvider>

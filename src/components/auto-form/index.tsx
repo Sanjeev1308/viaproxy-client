@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 'use client';
 import { Form } from '@/components/ui/form';
 import React from 'react';
@@ -43,7 +42,7 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   dependencies,
   multiFormInfo,
 }: {
-  formSchema: SchemaType[];
+  formSchema: SchemaType;
   values?: Partial<z.infer<SchemaType>>;
   onValuesChange?: (values: Partial<z.infer<SchemaType>>, form: UseFormReturn<z.infer<SchemaType>>) => void;
   onParsedValuesChange?: (values: Partial<z.infer<SchemaType>>, form: UseFormReturn<z.infer<SchemaType>>) => void;
@@ -54,21 +53,21 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   dependencies?: Dependency<z.infer<SchemaType>>[];
   multiFormInfo?: { layout: 'tabs' | 'multi-step' | 'default'; items: { title: string; schema: SchemaType }[] };
 }) {
-  const mergedSchema = formSchema.reduce((acc, schema) => (acc as any).merge(schema), formSchema[0]);
-  const objectFormSchema = getObjectFormSchema(mergedSchema);
+  // const mergedSchema = formSchema.reduce((acc, schema) => (acc as any).merge(schema), formSchema[0]);
+  const objectFormSchema = getObjectFormSchema(formSchema);
   const defaultValues: DefaultValues<z.infer<typeof objectFormSchema>> | null = getDefaultValues(
     objectFormSchema,
     fieldConfig,
   );
 
   const form = useForm<z.infer<typeof objectFormSchema>>({
-    resolver: zodResolver(mergedSchema),
+    resolver: zodResolver(formSchema),
     defaultValues: defaultValues ?? undefined,
     values: valuesProp,
   });
 
-  function onSubmit(values: z.infer<typeof mergedSchema>) {
-    const parsedValues = mergedSchema.safeParse(values);
+  function onSubmit(values: z.infer<typeof formSchema>) {
+    const parsedValues = formSchema.safeParse(values);
     if (parsedValues.success) {
       onSubmitProp?.(parsedValues.data, form);
     }
@@ -77,7 +76,8 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   React.useEffect(() => {
     const subscription = form.watch((values) => {
       onValuesChangeProp?.(values, form);
-      const parsedValues = mergedSchema.safeParse(values);
+      console.log('lll', values, form);
+      const parsedValues = formSchema.safeParse(values);
       if (parsedValues.success) {
         onParsedValuesChange?.(parsedValues.data, form);
       }

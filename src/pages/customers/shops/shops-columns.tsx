@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header';
 import { DataTableRowActions } from '@/components/data-table/data-table-row-actions';
 import { Badge } from '@/components/ui/badge';
@@ -35,22 +34,22 @@ export const columns: ColumnDef<Shop>[] = [
     enableSorting: false,
     enableHiding: false,
   },
-  {
-    accessorKey: 'username',
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Username" />,
-    cell: ({ row }) => (
-      <div>{row.getValue('username')}</div>
-      //   <LongText className='max-w-36'>{row.getValue('username')}</LongText>
-    ),
-    meta: {
-      className: cn(
-        'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
-        'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
-        'sticky left-6 md:table-cell',
-      ),
-    },
-    enableHiding: false,
-  },
+  // {
+  //   accessorKey: 'email',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
+  //   cell: ({ row }) => (
+  //     <div>{row.getValue('email')}</div>
+  //     //   <LongText className='max-w-36'>{row.getValue('username')}</LongText>
+  //   ),
+  //   meta: {
+  //     className: cn(
+  //       'drop-shadow-[0_1px_2px_rgb(0_0_0_/_0.1)] dark:drop-shadow-[0_1px_2px_rgb(255_255_255_/_0.1)] lg:drop-shadow-none',
+  //       'bg-background transition-colors duration-200 group-hover/row:bg-muted group-data-[state=selected]/row:bg-muted',
+  //       'sticky left-6 md:table-cell',
+  //     ),
+  //   },
+  //   enableHiding: false,
+  // },
   {
     id: 'fullName',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Name" />,
@@ -66,14 +65,14 @@ export const columns: ColumnDef<Shop>[] = [
     header: ({ column }) => <DataTableColumnHeader column={column} title="Email" />,
     cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('email')}</div>,
   },
+  // {
+  //   accessorKey: 'phoneNumber',
+  //   header: ({ column }) => <DataTableColumnHeader column={column} title="Phone Number" />,
+  //   cell: ({ row }) => <div>{row.getValue('phoneNumber')}</div>,
+  //   enableSorting: false,
+  // },
   {
-    accessorKey: 'phoneNumber',
-    header: ({ column }) => <DataTableColumnHeader column={column} title="Phone Number" />,
-    cell: ({ row }) => <div>{row.getValue('phoneNumber')}</div>,
-    enableSorting: false,
-  },
-  {
-    accessorKey: 'status',
+    accessorKey: 'isActive',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Status" />,
     cell: ({ row }) => {
       // const { status } = row.original
@@ -81,7 +80,7 @@ export const columns: ColumnDef<Shop>[] = [
       return (
         <div className="flex space-x-2">
           <Badge variant="outline" className={cn('capitalize', badgeColor)}>
-            {row.getValue('status')}
+            {row.getValue('isActive')}
           </Badge>
         </div>
       );
@@ -94,12 +93,12 @@ export const columns: ColumnDef<Shop>[] = [
     accessorKey: 'role',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Role" />,
     cell: ({ row }) => {
-      const { role } = row.original;
-      const userType = [].find(({ value }: any) => value === role);
+      // const { role } = row.original;
+      // const userType = [].find(({ value }: any) => value === role);
 
-      if (!userType) {
-        return null;
-      }
+      // if (!userType) {
+      //   return null;
+      // }
 
       return (
         <div className="flex gap-x-2 items-center">

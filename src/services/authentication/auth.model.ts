@@ -1,3 +1,4 @@
 export interface TokenResponse {
-  access_token: string;
+  accessToken: string;
+  role: string;
 }

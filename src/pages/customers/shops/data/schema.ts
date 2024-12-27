@@ -17,16 +17,14 @@ const userRoleSchema = z.union([
 export type UserRole = z.infer<typeof userRoleSchema>;
 
 const shopSchema = z.object({
-  id: z.string(),
+  // id: z.string(),
   firstName: z.string(),
   lastName: z.string(),
-  username: z.string(),
   email: z.string(),
-  phoneNumber: z.string(),
-  status: userStatusSchema,
-  role: userRoleSchema,
-  createdAt: z.coerce.date(),
-  updatedAt: z.coerce.date(),
+  isActive: z.boolean(),
+  role: z.string(),
+  // createdAt: z.coerce.date(),
+  // updatedAt: z.coerce.date(),
 });
 export type Shop = z.infer<typeof shopSchema>;
 

@@ -36,7 +36,7 @@ export function NavGroup({ title, items }: any) {
         {items.map((item: any) => {
           const key = `${item.title}-${item.url}`;
 
-          if (!item.routeChildren) return <SidebarMenuLink key={key} item={item} href={pathname} />;
+          if (!item.items) return <SidebarMenuLink key={key} item={item} href={pathname} />;
 
           if (state === 'collapsed') return <SidebarMenuCollapsedDropdown key={key} item={item} href={pathname} />;
 
@@ -81,7 +81,7 @@ const SidebarMenuCollapsible = ({ item, href }: { item: any; href: string }) => 
         </CollapsibleTrigger>
         <CollapsibleContent className="CollapsibleContent">
           <SidebarMenuSub>
-            {item.routeChildren.map((subItem: any) => (
+            {item.items.map((subItem: any) => (
               <SidebarMenuSubItem key={subItem.title}>
                 <SidebarMenuSubButton asChild isActive={checkIsActive(href, subItem)}>
                   <Link to={subItem.url} onClick={() => setOpenMobile(false)}>
@@ -116,7 +116,7 @@ const SidebarMenuCollapsedDropdown = ({ item, href }: { item: any; href: string 
             {item.title} {item.badge ? `(${item.badge})` : ''}
           </DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {item.routeChildren.map((sub: any) => (
+          {item.items.map((sub: any) => (
             <DropdownMenuItem key={`${sub.title}-${sub.url}`} asChild>
               <Link to={sub.url} className={`${checkIsActive(href, sub) ? 'bg-secondary' : ''}`}>
                 {sub.icon && <sub.icon />}

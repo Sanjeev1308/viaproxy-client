@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
+import AuthLayout from '@/features/auth/components/auth-layout';
 import { useVerifyEmail } from '@/hooks/api/auth.rq';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as z from 'zod';
@@ -21,28 +22,24 @@ export function VerifyEmail() {
   const navigate = useNavigate();
 
   const handleSubmit = async (data: any) => {
-    await mutateAsync({ email: searchParams.get('email') || '', OTPCode: data.OTPCode });
+    await mutateAsync({ email: searchParams.get('email') || '', otpCode: data.OTPCode });
     navigate('/auth/login');
   };
 
   return (
-    <>
-      <div className="mx-auto my-6 max-w-lg">
-        <Card>
-          <CardHeader>
-            <CardTitle>Verify Email</CardTitle>
-            <CardDescription>OTP is sent to your email {searchParams.get('email')}</CardDescription>
-          </CardHeader>
+    <AuthLayout>
+      <Card className="p-6">
+        <div className="mb-2 flex flex-col space-y-2 text-left">
+          <h1 className="text-md font-semibold tracking-tight">Verify Email</h1>
+          <p className="text-sm text-muted-foreground">OTP is sent to your email {searchParams.get('email')}</p>
+        </div>
 
-          <CardContent>
-            <AutoForm formSchema={formSchema} onSubmit={handleSubmit}>
-              <AutoFormSubmit className="w-full" disabled={isLoading}>
-                Verify Email
-              </AutoFormSubmit>
-            </AutoForm>
-          </CardContent>
-        </Card>
-      </div>
-    </>
+        <AutoForm formSchema={formSchema} onSubmit={handleSubmit}>
+          <AutoFormSubmit className="w-full" disabled={isLoading}>
+            Verify Email
+          </AutoFormSubmit>
+        </AutoForm>
+      </Card>
+    </AuthLayout>
   );
 }

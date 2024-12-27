@@ -1,4 +1,3 @@
-import { IRoutes } from '@/routes/types';
 import { LinkProps } from 'react-router-dom';
 
 interface User {
@@ -27,12 +26,14 @@ type NavItem = NavCollapsible | NavLink;
 
 interface NavGroup {
   title: string;
-  items: NavItem[];
+  url: string;
+  icon?: React.ElementType;
+  items?: NavItem[];
 }
 
 interface SidebarData {
   user: User;
-  navGroups: IRoutes[];
+  navGroups: (role: string) => NavGroup[];
 }
 
 export type { NavCollapsible, NavGroup, NavItem, NavLink, SidebarData };

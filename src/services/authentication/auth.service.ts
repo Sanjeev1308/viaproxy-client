@@ -30,8 +30,8 @@ export class AuthenticationService extends BaseService {
     return this.post(url, { email, password });
   }
 
-  verifyEmail(email: string, OTPCode: string): Promise<TokenResponse> {
+  verifyEmail(email: string, otpCode: string): Promise<TokenResponse> {
     const url = ApiURL.VERIFY_EMAIL;
-    return this.post(url, { email, OTPCode });
+    return this.post(url, { email, otpCode });
   }
 }

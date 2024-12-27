@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ErrorModel } from '@/models/api.model';
 import { TokenResponse } from '@/services/authentication/auth.model';
 import { AuthenticationService } from '@/services/authentication/auth.service';
@@ -13,18 +14,17 @@ export function useLogin(): UseMutationResult<TokenResponse, ErrorModel, { email
 export function useRegister(): UseMutationResult<
   TokenResponse,
   ErrorModel,
-  { firstName: string; lastName: string; email: string; password: string; role: string },
+  any, // { firstName: string; lastName: string; email: string; password: string; role: string },
   unknown
 > {
   return useMutation<
     TokenResponse,
     ErrorModel,
-    { firstName: string; lastName: string; email: string; password: string; role: string },
+    any, // { firstName: string; lastName: string; email: string; password: string; role: string },
     unknown
   >({
     mutationKey: ['register'],
-    mutationFn: ({ firstName, lastName, email, password, role }) =>
-      AuthenticationService.getInstance().register({ firstName, lastName, email, password, role: { name: role } }),
+    mutationFn: (data) => AuthenticationService.getInstance().register(data),
   });
 }
 
@@ -55,11 +55,11 @@ export function useChangePassword(): UseMutationResult<
 export function useVerifyEmail(): UseMutationResult<
   TokenResponse,
   ErrorModel,
-  { email: string; OTPCode: string },
+  { email: string; otpCode: string },
   unknown
 > {
-  return useMutation<TokenResponse, ErrorModel, { email: string; OTPCode: string }, unknown>({
+  return useMutation<TokenResponse, ErrorModel, { email: string; otpCode: string }, unknown>({
     mutationKey: ['verifyEmail'],
-    mutationFn: ({ email, OTPCode }) => AuthenticationService.getInstance().verifyEmail(email, OTPCode),
+    mutationFn: ({ email, otpCode }) => AuthenticationService.getInstance().verifyEmail(email, otpCode),
   });
 }

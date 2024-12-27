@@ -1,7 +1,8 @@
+import ComingSoon from '@/components/coming-soon';
 import Dashboard from '@/pages/customers/dashboard';
-import { NewExchange } from '@/pages/customers/exchanges';
+import HowItWorks from '@/pages/customers/exchanges/how-it-works';
+import SubmitOffer from '@/pages/customers/exchanges/submit-an-offer';
 import Chats from '@/pages/customers/messaging';
-import { Shops } from '@/pages/customers/shops';
 import { Home, MessageCircle, Settings, ShoppingBag } from 'lucide-react';
 import { IRoutes } from './types';
 
@@ -26,12 +27,12 @@ export const studentRoutes: IRoutes[] = [
       {
         title: 'Shops',
         url: '/student/shops',
-        content: Shops,
+        content: ComingSoon,
       },
       {
         title: 'Products',
         url: '/student/products',
-        content: Shops,
+        content: ComingSoon,
       },
     ],
   },
@@ -43,17 +44,17 @@ export const studentRoutes: IRoutes[] = [
       {
         title: 'Proxy Checks',
         url: '/student/proxy-checks',
-        content: Shops,
+        content: ComingSoon,
       },
       {
         title: 'Promo Coupons',
         url: '/student/coupons',
-        content: Shops,
+        content: ComingSoon,
       },
       {
         title: 'Promotions',
         url: '/student/promotions',
-        content: Shops,
+        content: ComingSoon,
       },
     ],
   },
@@ -65,22 +66,27 @@ export const studentRoutes: IRoutes[] = [
       {
         title: 'How does it works?',
         url: '/student/exchange/how-it-works',
-        content: Shops,
+        content: HowItWorks,
+      },
+      {
+        title: 'Submit an offer',
+        url: '/student/exchange/submit-an-offer',
+        content: SubmitOffer,
       },
       {
         title: 'B2B Exchanges',
         url: '/student/exchange/b2b-exchanges',
-        content: NewExchange,
+        content: ComingSoon,
       },
       {
         title: 'B2B Sales',
         url: '/student/exchange/b2b-sales',
-        content: Shops,
+        content: ComingSoon,
       },
       {
         title: 'Legal Information',
         url: '/student/exchange/legal-info',
-        content: Shops,
+        content: ComingSoon,
       },
     ],
   },

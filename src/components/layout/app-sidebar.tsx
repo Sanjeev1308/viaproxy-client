@@ -10,9 +10,11 @@ import {
   SidebarMenuItem,
   SidebarRail,
 } from '@/components/ui/sidebar';
+import { useAuth } from '@/context/AuthProvider';
 import { sidebarData } from './data/sidebar-data';
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const { user } = useAuth();
   return (
     <Sidebar collapsible="icon" variant="floating" {...props}>
       <SidebarHeader>
@@ -34,10 +36,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
-        {/* {sidebarData.navGroups.map((props) => (
-          <NavGroup key={props.title} {...props} />
-        ))} */}
-        <NavGroup items={sidebarData.navGroups} />
+        <NavGroup items={sidebarData.navGroups(user?.role || '')} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser user={sidebarData.user} />

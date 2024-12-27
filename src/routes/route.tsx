@@ -1,4 +1,5 @@
 import App from '@/App';
+import ForgotPassword from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
 import { Register } from '@/pages/auth/register';
 import { VerifyEmail } from '@/pages/auth/verify-email';
@@ -43,6 +44,7 @@ export default function AppRoutes() {
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/verify-email" element={<VerifyEmail />} />
+      <Route path="/auth/forgot-password" element={<ForgotPassword />} />
 
       {role === 'student' ? renderRoutes(studentRoutes) : null}
     </Routes>
