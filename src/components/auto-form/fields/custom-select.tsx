@@ -1,33 +1,32 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FormControl, FormItem, FormMessage } from '@/components/ui/form';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import * as z from 'zod';
 import AutoFormLabel from '../common/label';
 import AutoFormTooltip from '../common/tooltip';
 import { AutoFormInputComponentProps } from '../types';
-import { getBaseSchema } from '../utils';
 
-export default function AutoFormEnum({
+export default function AutoFormCustomSelect({
   label,
   isRequired,
   field,
   fieldConfigItem,
   zodItem,
   fieldProps,
+  selectOptions,
 }: AutoFormInputComponentProps) {
   const { className = 'w-full' } = fieldProps;
 
-  const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def.values;
+  //   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def.values;
 
-  let values: [string, string][] = [];
-  if (!Array.isArray(baseValues)) {
-    values = Object.entries(baseValues);
-  } else {
-    values = baseValues.map((value) => [value, value]);
-  }
+  //   let values: [string, string][] = [];
+  //   if (!Array.isArray(baseValues)) {
+  //     values = Object.entries(baseValues);
+  //   } else {
+  //     values = baseValues.map((value) => [value, value]);
+  //   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function findItem(value: any) {
-    return values.find((item) => item[0] === value);
+    return selectOptions?.find((item) => item.value === value);
   }
 
   return (
@@ -38,13 +37,13 @@ export default function AutoFormEnum({
           <Select onValueChange={field.onChange} defaultValue={field.value} {...fieldProps}>
             <SelectTrigger>
               <SelectValue placeholder={fieldConfigItem.inputProps?.placeholder}>
-                {field.value ? findItem(field.value)?.[1] : 'Select an option'}
+                {field.value ? findItem(field.value)?.label : 'Select an option'}
               </SelectValue>
             </SelectTrigger>
             <SelectContent>
-              {values.map(([value, label]) => (
-                <SelectItem value={label} key={value}>
-                  {label}
+              {selectOptions?.map((option) => (
+                <SelectItem value={option.value} key={option.value}>
+                  {option.label}
                 </SelectItem>
               ))}
             </SelectContent>

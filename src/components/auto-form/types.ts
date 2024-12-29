@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import { IDropDownOption } from '@/models/form-field.model';
 import { ControllerRenderProps, FieldValues } from 'react-hook-form';
 import * as z from 'zod';
 import { INPUT_COMPONENTS } from './config';
@@ -65,4 +66,5 @@ export type AutoFormInputComponentProps = {
   fieldProps: any;
   zodItem: z.ZodAny;
   className?: string;
+  selectOptions?: IDropDownOption[];
 };

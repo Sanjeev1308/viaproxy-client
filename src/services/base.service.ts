@@ -60,12 +60,30 @@ export abstract class BaseService implements Client {
     return this.service.post(path, data);
   }
 
+  postFormData<T>(path: string, data?: any): Promise<T> {
+    return this.service.post(path, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  }
+
   put<T>(path: string, data?: any): Promise<T> {
     return this.service.put(path, data);
   }
 
+  putFormData<T>(path: string, data: any): Promise<T> {
+    return this.service.put(path, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
+  }
+
   patch<T>(path: string, data: any): Promise<T> {
     return this.service.patch(path, data);
+  }
+
+  patchFormData<T>(path: string, data: any): Promise<T> {
+    return this.service.patch(path, data, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+    });
   }
 
   delete<T>(path: string): Promise<T> {

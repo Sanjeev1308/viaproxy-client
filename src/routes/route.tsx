@@ -3,6 +3,7 @@ import ForgotPassword from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
 import { Register } from '@/pages/auth/register';
 import { VerifyEmail } from '@/pages/auth/verify-email';
+import LandingPage from '@/pages/landing-page';
 import { Route, Routes } from 'react-router-dom';
 import { Fragment } from 'react/jsx-runtime';
 import { studentRoutes } from './student.route';
@@ -41,6 +42,7 @@ export default function AppRoutes() {
 
   return (
     <Routes>
+      <Route path="/" element={<LandingPage />} />
       <Route path="/auth/login" element={<Login />} />
       <Route path="/auth/register" element={<Register />} />
       <Route path="/auth/verify-email" element={<VerifyEmail />} />

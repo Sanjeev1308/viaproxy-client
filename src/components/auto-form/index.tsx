@@ -76,7 +76,6 @@ function AutoForm<SchemaType extends ZodObjectOrWrapped>({
   React.useEffect(() => {
     const subscription = form.watch((values) => {
       onValuesChangeProp?.(values, form);
-      console.log('lll', values, form);
       const parsedValues = formSchema.safeParse(values);
       if (parsedValues.success) {
         onParsedValuesChange?.(parsedValues.data, form);

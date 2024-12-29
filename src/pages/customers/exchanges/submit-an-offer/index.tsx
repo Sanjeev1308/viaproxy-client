@@ -6,9 +6,16 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { CheckedState } from '@radix-ui/react-checkbox';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubmitOffer() {
   const [isTermAndConditionChecked, setIsTermAndConditionChecked] = useState<CheckedState>(false);
+
+  const navigate = useNavigate();
+
+  const redirectToExchageOffer = () => {
+    navigate('/student/exchange/new');
+  };
 
   return (
     <Main>
@@ -46,7 +53,9 @@ export default function SubmitOffer() {
               </div>
 
               <div>
-                <Button disabled={!isTermAndConditionChecked}>Submit an offer</Button>
+                <Button disabled={!isTermAndConditionChecked} onClick={redirectToExchageOffer}>
+                  Submit an offer
+                </Button>
               </div>
             </div>
           </CardFooter>

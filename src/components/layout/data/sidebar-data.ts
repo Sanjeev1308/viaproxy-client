@@ -72,13 +72,13 @@ const studentRoutes: NavGroup[] = [
         url: '/student/exchange/submit-an-offer',
       },
       {
-        title: 'B2B Exchanges',
-        url: '/student/exchange/b2b-exchanges',
+        title: 'Find Exchanges',
+        url: '/student/exchanges',
       },
-      {
-        title: 'B2B Sales',
-        url: '/student/exchange/b2b-sales',
-      },
+      // {
+      //   title: 'B2B Sales',
+      //   url: '/student/exchange/b2b-sales',
+      // },
       {
         title: 'Legal Information',
         url: '/student/exchange/legal-info',

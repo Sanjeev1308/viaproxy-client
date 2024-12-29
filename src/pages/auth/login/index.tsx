@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
-import { useAuth } from '@/context/AuthProvider';
 import { useLogin } from '@/hooks/api/auth.rq';
 import { Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
@@ -21,12 +20,11 @@ const formSchema = z.object({
 export function Login() {
   const navigate = useNavigate();
   const { mutateAsync, isLoading } = useLogin();
-  const { login } = useAuth();
 
   const handleSubmit = async (data: any) => {
     try {
       const result = await mutateAsync(data);
-      login(result.accessToken);
+      localStorage.setItem('accessToken', result.accessToken);
       navigate(`/${result.role}/dashboard`);
     } catch (error: any) {
       console.log('error', error);

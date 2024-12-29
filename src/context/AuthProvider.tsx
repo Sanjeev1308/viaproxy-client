@@ -35,7 +35,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const location = useLocation();
 
   const isAuthRoute = (path: string) => {
-    return ['/auth/login', '/auth/register', '/auth/verify-email', '/auth/forgot-password'].includes(path);
+    return ['/', '/auth/login', '/auth/register', '/auth/verify-email', '/auth/forgot-password'].includes(path);
   };
 
   useEffect(() => {
@@ -65,7 +65,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     if (accessToken) {
       const decoded: any = jwtDecode(accessToken);
       BaseService.setAuthToken(accessToken);
-      localStorage.setItem('accessToken', accessToken);
       setIsAuthenticated(true);
       setUser((prev) => ({
         ...prev,

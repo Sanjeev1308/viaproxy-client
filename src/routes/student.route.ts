@@ -1,7 +1,10 @@
 import ComingSoon from '@/components/coming-soon';
 import Dashboard from '@/pages/customers/dashboard';
+import { Exchanges } from '@/pages/customers/exchanges/find-exchanges';
 import HowItWorks from '@/pages/customers/exchanges/how-it-works';
 import SubmitOffer from '@/pages/customers/exchanges/submit-an-offer';
+import EditExchangeOffer from '@/pages/customers/exchanges/submit-an-offer/edit-exchange';
+import NewExchangeOffer from '@/pages/customers/exchanges/submit-an-offer/new-exchange';
 import Chats from '@/pages/customers/messaging';
 import { Home, MessageCircle, Settings, ShoppingBag } from 'lucide-react';
 import { IRoutes } from './types';
@@ -74,9 +77,19 @@ export const studentRoutes: IRoutes[] = [
         content: SubmitOffer,
       },
       {
+        title: '',
+        url: '/student/exchange/new',
+        content: NewExchangeOffer,
+      },
+      {
+        title: '',
+        url: '/student/exchange/:id',
+        content: EditExchangeOffer,
+      },
+      {
         title: 'B2B Exchanges',
-        url: '/student/exchange/b2b-exchanges',
-        content: ComingSoon,
+        url: '/student/exchanges',
+        content: Exchanges,
       },
       {
         title: 'B2B Sales',

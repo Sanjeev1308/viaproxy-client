@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -9,14 +8,18 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useActions } from '@/hooks/useActions';
 import { Row } from '@tanstack/react-table';
-import { Edit, MoreHorizontal, Trash } from 'lucide-react';
+import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react';
 
 interface DataTableRowActionsProps {
   row: Row<any>;
+  handleEdit: (id: string) => void;
 }
 
-export function DataTableRowActions() {
+export function DataTableRowActions({ row, handleEdit }: DataTableRowActionsProps) {
+  const { setOpen, setCurrentRow } = useActions();
+
   return (
     <>
       <DropdownMenu modal={false}>
@@ -28,13 +31,25 @@ export function DataTableRowActions() {
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
           <DropdownMenuItem onClick={() => {}}>
+            View
+            <DropdownMenuShortcut>
+              <Eye size={16} />
+            </DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={() => handleEdit(row.original._id)}>
             Edit
             <DropdownMenuShortcut>
               <Edit size={16} />
             </DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem onClick={() => {}} className="!text-red-500">
+          <DropdownMenuItem
+            onClick={() => {
+              setCurrentRow(row.original);
+              setOpen('delete');
+            }}
+            className="!text-red-500"
+          >
             Delete
             <DropdownMenuShortcut>
               <Trash size={16} />
