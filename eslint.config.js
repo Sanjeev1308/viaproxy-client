@@ -26,6 +26,8 @@ export default tseslint.config(
           vars: 'all',
           args: 'after-used', // Can also be "none" or "all"
           ignoreRestSiblings: false,
+          varsIgnorePattern: '^_', // Ignore variables prefixed with _
+          argsIgnorePattern: '^_', // Ignore arguments prefixed with _
         },
       ],
       '@typescript-eslint/no-unused-vars': [
@@ -34,6 +36,8 @@ export default tseslint.config(
           vars: 'all', // Check all variables
           args: 'after-used', // Check arguments only after they're used
           ignoreRestSiblings: false, // Don't ignore rest siblings in destructuring
+          varsIgnorePattern: '^_', // Ignore variables prefixed with _
+          argsIgnorePattern: '^_', // Ignore arguments prefixed with _
         },
       ],
     },

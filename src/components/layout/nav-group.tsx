@@ -25,7 +25,7 @@ import {
 } from '../ui/dropdown-menu';
 import { NavItem, NavLink } from './types';
 
-export function NavGroup({ title, items }: any) {
+export function NavGroup({ items }: any) {
   const { state } = useSidebar();
   const { pathname } = useLocation();
 

@@ -9,7 +9,6 @@ export default function AutoFormCustomSelect({
   isRequired,
   field,
   fieldConfigItem,
-  zodItem,
   fieldProps,
   selectOptions,
 }: AutoFormInputComponentProps) {
