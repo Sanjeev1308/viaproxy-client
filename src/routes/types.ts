@@ -13,3 +13,5 @@ export interface IRoutesWithChildren extends IRoutesBase {
 }
 
 export type IRoutes = IRoutesBase | IRoutesWithChildren;
+
+export type Role = 'admin' | 'student' | 'eco-citizen' | 'merchant';

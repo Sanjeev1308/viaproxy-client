@@ -2,6 +2,7 @@
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { useLogin } from '@/hooks/api/auth.rq';
 import { useToast } from '@/hooks/use-toast';
+import { useActions } from '@/hooks/useActions';
 import { Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
 
@@ -21,12 +22,17 @@ const formSchema = z.object({
 export function Login() {
   const navigate = useNavigate();
   const { mutateAsync, isLoading } = useLogin();
+  const { login: loginAction } = useActions();
   const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
     try {
       const result = await mutateAsync(data);
-      localStorage.setItem('accessToken', result.accessToken);
+
+      loginAction({
+        accessToken: result.accessToken,
+      });
+
       navigate(`/${result.role}/dashboard`);
     } catch (error: any) {
       toast({

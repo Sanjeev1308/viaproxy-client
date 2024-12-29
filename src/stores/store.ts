@@ -1,8 +1,9 @@
 import { dataTableDialogReducer } from '@/stores/slices/data-table-dialog.slice';
 import { configureStore } from '@reduxjs/toolkit';
+import { authReducer } from './slices/auth.slice';
 
 export const store = configureStore({
-  reducer: { dataTableDialog: dataTableDialogReducer },
+  reducer: { dataTableDialog: dataTableDialogReducer, auth: authReducer },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

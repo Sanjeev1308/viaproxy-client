@@ -1,44 +1,48 @@
 import App from '@/App';
+import ComingSoon from '@/components/coming-soon';
 import ForgotPassword from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
 import { Register } from '@/pages/auth/register';
 import { VerifyEmail } from '@/pages/auth/verify-email';
 import LandingPage from '@/pages/landing-page';
+import Dashboard from '@/pages/students/dashboard';
+import { Exchanges } from '@/pages/students/exchanges/find-exchanges';
+import HowItWorks from '@/pages/students/exchanges/how-it-works';
+import SubmitOffer from '@/pages/students/exchanges/submit-an-offer';
+import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-exchange';
+import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
+import Chats from '@/pages/students/messaging';
 import { Route, Routes } from 'react-router-dom';
-import { Fragment } from 'react/jsx-runtime';
-import { studentRoutes } from './student.route';
-import { IRoutes, IRoutesWithChildren } from './types';
 
-const FallbackComponent = () => <div>Page Not Available</div>;
-type Role = 'admin' | 'student';
+// const FallbackComponent = () => <div>Page Not Available</div>;
 
 export default function AppRoutes() {
-  const role: Role = 'student';
+  // const { user } = useTypedSelector((state) => state.auth);
 
-  const hasChildren = (route: IRoutes): route is IRoutesWithChildren => {
-    return (route as IRoutesWithChildren).routeChildren !== undefined;
-  };
+  // const hasChildren = (route: IRoutes): route is IRoutesWithChildren => {
+  //   return (route as IRoutesWithChildren).routeChildren !== undefined;
+  // };
 
-  const renderRoutes = (routes: IRoutes[]) => {
-    return routes.map((route) => {
-      if (hasChildren(route)) {
-        return <Fragment key={route.url}>{renderRoutes(route.routeChildren)}</Fragment>;
-      }
+  // const renderRoutes = (routes: IRoutes[]) => {
+  //   return routes.map((route) => {
+  //     if (hasChildren(route)) {
+  //       return <Fragment key={route.url}>{renderRoutes(route.routeChildren)}</Fragment>;
+  //     }
 
-      const Component = route.content || FallbackComponent;
-      return (
-        <Route
-          key={route.url}
-          path={route.url}
-          element={
-            <App>
-              <Component />
-            </App>
-          }
-        />
-      );
-    });
-  };
+  //     const Component = route.content || FallbackComponent;
+  //     return (
+  //       <Route
+  //         key={route.url}
+  //         path={route.url}
+  //         element={
+  //           <App>
+  //             <Component />
+  //           </App>
+  //         }
+  //       />
+  //     );
+  //   });
+  // };
 
   return (
     <Routes>
@@ -48,7 +52,38 @@ export default function AppRoutes() {
       <Route path="/auth/verify-email" element={<VerifyEmail />} />
       <Route path="/auth/forgot-password" element={<ForgotPassword />} />
 
-      {role === 'student' ? renderRoutes(studentRoutes) : null}
+      <Route path="/student" element={<App />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="how-it-works" element={<HowItWorks />} />
+        <Route path="chats" element={<Chats />} />
+
+        <Route path="exchanges">
+          <Route index element={<Exchanges />} />
+          <Route path="legal-info" element={<ComingSoon />} />
+          <Route path="me" element={<ComingSoon />} />
+          <Route path="submit-an-offer" element={<SubmitOffer />} />
+          <Route path="new" element={<NewExchangeOffer />} />
+          <Route path=":id" element={<EditExchangeOffer />} />
+        </Route>
+      </Route>
+
+      <Route path="/admin" element={<App />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="users" element={<ComingSoon />} />
+        <Route path="promotions" element={<ComingSoon />} />
+        <Route path="ads" element={<ComingSoon />} />
+      </Route>
+
+      <Route path="/merchant" element={<App />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="chats" element={<Chats />} />
+      </Route>
+
+      <Route path="/eco-citizen" element={<App />}>
+        <Route path="dashboard" element={<Dashboard />} />
+        <Route path="how-it-works" element={<HowItWorks />} />
+        <Route path="chats" element={<Chats />} />
+      </Route>
     </Routes>
   );
 }
