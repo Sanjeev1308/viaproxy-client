@@ -3,6 +3,7 @@ import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { Card } from '@/components/ui/card';
 import AuthLayout from '@/features/auth/components/auth-layout';
 import { useVerifyEmail } from '@/hooks/api/auth.rq';
+import { useToast } from '@/hooks/use-toast';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import * as z from 'zod';
 
@@ -20,10 +21,19 @@ export function VerifyEmail() {
   const { mutateAsync, isLoading } = useVerifyEmail();
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
-    await mutateAsync({ email: searchParams.get('email') || '', otpCode: data.OTPCode });
-    navigate('/auth/login');
+    try {
+      await mutateAsync({ email: searchParams.get('email') || '', otpCode: data.OTPCode });
+      navigate('/auth/login');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
 
   return (

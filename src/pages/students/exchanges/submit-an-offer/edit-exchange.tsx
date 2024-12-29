@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
 import ExchangeOfferForm from '@/features/exchanges/components/exchange-form';
 import { useOfferById, useUpdateOfferById } from '@/hooks/api/offer.rq';
+import { useToast } from '@/hooks/use-toast';
 import { objectToFormData } from '@/utils/form-data.utils';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -13,11 +14,20 @@ export default function EditExchangeOffer() {
   const { data, isLoading } = useOfferById(exchangeId || '');
   const { mutateAsync, isLoading: isUpdateExchangeLoading } = useUpdateOfferById();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
-    const formData = objectToFormData(data);
-    await mutateAsync({ id: exchangeId || '', data: formData });
-    navigate('/student/exchanges');
+    try {
+      const formData = objectToFormData(data);
+      await mutateAsync({ id: exchangeId || '', data: formData });
+      navigate('/student/exchanges');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
 
   // Preprocess the data to convert string dates to Date objects

@@ -5,6 +5,7 @@ import { Main } from '@/components/layout/main';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useAuth } from '@/context/AuthProvider';
 import { useAllOffers, useDeleteOfferById } from '@/hooks/api/offer.rq';
+import { useToast } from '@/hooks/use-toast';
 import { useActions } from '@/hooks/useActions';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -16,6 +17,7 @@ export function Exchanges() {
   const { setCurrentRow } = useActions();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const { data, isLoading, error } = useAllOffers();
   const { mutateAsync, isLoading: isOfferDeleteLoading } = useDeleteOfferById();
@@ -27,10 +29,18 @@ export function Exchanges() {
   }, [data]);
 
   const onDeleteExchange = async (id: string) => {
-    await mutateAsync(id);
-    const filteredUserList = exchangeList.filter((exchange: any) => exchange._id !== id);
-    setExchangeList(filteredUserList);
-    setCurrentRow(null);
+    try {
+      await mutateAsync(id);
+      const filteredUserList = exchangeList.filter((exchange: any) => exchange._id !== id);
+      setExchangeList(filteredUserList);
+      setCurrentRow(null);
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
 
   const handleEdit = (id: string) => {

@@ -3,6 +3,7 @@ import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { Card } from '@/components/ui/card';
 import AuthLayout from '@/features/auth/components/auth-layout';
 import { useForgotPassword } from '@/hooks/api/auth.rq';
+import { useToast } from '@/hooks/use-toast';
 import { Link } from 'react-router-dom';
 import * as z from 'zod';
 
@@ -12,9 +13,18 @@ const formSchema = z.object({
 
 export default function ForgotPassword() {
   const { mutateAsync, isLoading } = useForgotPassword();
+  const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
-    await mutateAsync(data);
+    try {
+      await mutateAsync(data);
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
   return (
     <AuthLayout>

@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { useLogin } from '@/hooks/api/auth.rq';
+import { useToast } from '@/hooks/use-toast';
 import { Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
 
@@ -20,6 +21,7 @@ const formSchema = z.object({
 export function Login() {
   const navigate = useNavigate();
   const { mutateAsync, isLoading } = useLogin();
+  const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
     try {
@@ -27,7 +29,11 @@ export function Login() {
       localStorage.setItem('accessToken', result.accessToken);
       navigate(`/${result.role}/dashboard`);
     } catch (error: any) {
-      console.log('error', error);
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
     }
   };
 

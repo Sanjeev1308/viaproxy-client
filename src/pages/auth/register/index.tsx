@@ -3,6 +3,7 @@ import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useRegister } from '@/hooks/api/auth.rq';
+import { useToast } from '@/hooks/use-toast';
 import { useMemo, useState } from 'react';
 import { createSearchParams, Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
@@ -58,16 +59,25 @@ export function Register() {
   const navigate = useNavigate();
   const { mutateAsync, isLoading } = useRegister();
   const [currentRole, setCurrentRole] = useState('student');
+  const { toast } = useToast();
 
   // Use useMemo to avoid recalculating form schema on every render
   const currentFormSchema = useMemo(() => generateFormSchema(currentRole), [currentRole]);
 
   const handleSubmit = async (data: any) => {
-    await mutateAsync({ ...data, role: currentRole });
-    navigate({
-      pathname: '/auth/verify-email',
-      search: createSearchParams({ email: data.email }).toString(),
-    });
+    try {
+      await mutateAsync({ ...data, role: currentRole });
+      navigate({
+        pathname: '/auth/verify-email',
+        search: createSearchParams({ email: data.email }).toString(),
+      });
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
 
   return (

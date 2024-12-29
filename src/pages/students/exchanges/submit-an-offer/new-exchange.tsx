@@ -4,17 +4,27 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import ExchangeOfferForm from '@/features/exchanges/components/exchange-form';
 import { useCreateOffer } from '@/hooks/api/offer.rq';
+import { useToast } from '@/hooks/use-toast';
 import { objectToFormData } from '@/utils/form-data.utils';
 import { useNavigate } from 'react-router-dom';
 
 export default function NewExchangeOffer() {
   const { mutateAsync, isLoading } = useCreateOffer();
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const handleSubmit = async (data: any) => {
-    const formData = objectToFormData(data);
-    await mutateAsync(formData);
-    navigate('/student/exchanges');
+    try {
+      const formData = objectToFormData(data);
+      await mutateAsync(formData);
+      navigate('/student/exchanges');
+    } catch (error: any) {
+      toast({
+        variant: 'destructive',
+        title: error.name,
+        description: error.message,
+      });
+    }
   };
 
   return (

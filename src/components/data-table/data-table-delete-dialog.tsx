@@ -21,7 +21,8 @@ export function DataTableDeleteDialog({ open, onOpenChange, currentRow, handleDe
     }
     onOpenChange(false);
     toast({
-      title: 'The following user has been deleted:',
+      variant: 'success',
+      title: 'The following item has been deleted',
     });
   };
 
@@ -39,19 +40,10 @@ export function DataTableDeleteDialog({ open, onOpenChange, currentRow, handleDe
       desc={
         <div className="space-y-4">
           <p className="mb-2">
-            Are you sure you want to delete <span className="font-bold">{currentRow.username}</span>?
+            Are you sure you want to delete?
             <br />
             This action will permanently remove the item from the system. This cannot be undone.
           </p>
-
-          {/* <Label className='my-2'>
-            Username:
-            <Input
-              value={value}
-              onChange={(e) => setValue(e.target.value)}
-              placeholder='Enter username to confirm deletion.'
-            />
-          </Label> */}
 
           <Alert variant="destructive">
             <AlertTitle>Warning!</AlertTitle>
