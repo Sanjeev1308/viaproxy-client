@@ -6,16 +6,18 @@ import { Skeleton } from '@/components/ui/skeleton';
 import ExchangeOfferForm from '@/features/exchanges/components/exchange-form';
 import { useOfferById, useUpdateOfferById } from '@/hooks/api/offer.rq';
 import { objectToFormData } from '@/utils/form-data.utils';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 export default function EditExchangeOffer() {
   const { id: exchangeId } = useParams();
   const { data, isLoading } = useOfferById(exchangeId || '');
   const { mutateAsync, isLoading: isUpdateExchangeLoading } = useUpdateOfferById();
+  const navigate = useNavigate();
 
   const handleSubmit = async (data: any) => {
     const formData = objectToFormData(data);
     await mutateAsync({ id: exchangeId || '', data: formData });
+    navigate('/student/exchanges');
   };
 
   // Preprocess the data to convert string dates to Date objects

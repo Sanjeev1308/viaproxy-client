@@ -1,11 +1,11 @@
 import ComingSoon from '@/components/coming-soon';
-import Dashboard from '@/pages/customers/dashboard';
-import { Exchanges } from '@/pages/customers/exchanges/find-exchanges';
-import HowItWorks from '@/pages/customers/exchanges/how-it-works';
-import SubmitOffer from '@/pages/customers/exchanges/submit-an-offer';
-import EditExchangeOffer from '@/pages/customers/exchanges/submit-an-offer/edit-exchange';
-import NewExchangeOffer from '@/pages/customers/exchanges/submit-an-offer/new-exchange';
-import Chats from '@/pages/customers/messaging';
+import Dashboard from '@/pages/students/dashboard';
+import { Exchanges } from '@/pages/students/exchanges/find-exchanges';
+import HowItWorks from '@/pages/students/exchanges/how-it-works';
+import SubmitOffer from '@/pages/students/exchanges/submit-an-offer';
+import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-exchange';
+import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
+import Chats from '@/pages/students/messaging';
 import { Home, MessageCircle, Settings, ShoppingBag } from 'lucide-react';
 import { IRoutes } from './types';
 
@@ -67,23 +67,28 @@ export const studentRoutes: IRoutes[] = [
     url: '',
     routeChildren: [
       {
+        title: 'Legal Information',
+        url: '/student/exchanges/legal-info',
+        content: ComingSoon,
+      },
+      {
         title: 'How does it works?',
-        url: '/student/exchange/how-it-works',
+        url: '/student/exchanges/how-it-works',
         content: HowItWorks,
       },
       {
         title: 'Submit an offer',
-        url: '/student/exchange/submit-an-offer',
+        url: '/student/exchanges/submit-an-offer',
         content: SubmitOffer,
       },
       {
         title: '',
-        url: '/student/exchange/new',
+        url: '/student/exchanges/new',
         content: NewExchangeOffer,
       },
       {
         title: '',
-        url: '/student/exchange/:id',
+        url: '/student/exchanges/:id',
         content: EditExchangeOffer,
       },
       {
@@ -94,11 +99,6 @@ export const studentRoutes: IRoutes[] = [
       {
         title: 'B2B Sales',
         url: '/student/exchange/b2b-sales',
-        content: ComingSoon,
-      },
-      {
-        title: 'Legal Information',
-        url: '/student/exchange/legal-info',
         content: ComingSoon,
       },
     ],

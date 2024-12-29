@@ -2,6 +2,8 @@ import { Main } from '@/components/layout/main';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Overview } from '@/features/dashboard/components/overview';
+import { RecentSales } from '@/features/dashboard/components/recent-sales';
 // import { Search } from '@/components/search'
 // import { ThemeSwitch } from '@/components/theme-switch'
 // import { Overview } from './components/overview'
@@ -13,7 +15,7 @@ export default function Dashboard() {
       <div className="mb-2 flex items-center justify-between space-y-2">
         <h1 className="text-2xl font-bold tracking-tight">Dashboard</h1>
         <div className="flex items-center space-x-2">
-          <Button>Download</Button>
+          <Button>Submit an offer</Button>
         </div>
       </div>
       <Tabs orientation="vertical" defaultValue="overview" className="space-y-4">
@@ -22,12 +24,6 @@ export default function Dashboard() {
             <TabsTrigger value="overview">Overview</TabsTrigger>
             <TabsTrigger value="analytics" disabled>
               Analytics
-            </TabsTrigger>
-            <TabsTrigger value="reports" disabled>
-              Reports
-            </TabsTrigger>
-            <TabsTrigger value="notifications" disabled>
-              Notifications
             </TabsTrigger>
           </TabsList>
         </div>
@@ -126,14 +122,18 @@ export default function Dashboard() {
               <CardHeader>
                 <CardTitle>Overview</CardTitle>
               </CardHeader>
-              <CardContent className="pl-2">{/* <Overview /> */}</CardContent>
+              <CardContent className="pl-2">
+                <Overview />
+              </CardContent>
             </Card>
             <Card className="col-span-1 lg:col-span-3">
               <CardHeader>
                 <CardTitle>Recent Sales</CardTitle>
                 <CardDescription>You made 265 sales this month.</CardDescription>
               </CardHeader>
-              <CardContent>{/* <RecentSales /> */}</CardContent>
+              <CardContent>
+                <RecentSales />
+              </CardContent>
             </Card>
           </div>
         </TabsContent>

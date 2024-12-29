@@ -5,13 +5,16 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import ExchangeOfferForm from '@/features/exchanges/components/exchange-form';
 import { useCreateOffer } from '@/hooks/api/offer.rq';
 import { objectToFormData } from '@/utils/form-data.utils';
+import { useNavigate } from 'react-router-dom';
 
 export default function NewExchangeOffer() {
   const { mutateAsync, isLoading } = useCreateOffer();
+  const navigate = useNavigate();
 
   const handleSubmit = async (data: any) => {
     const formData = objectToFormData(data);
     await mutateAsync(formData);
+    navigate('/student/exchanges');
   };
 
   return (

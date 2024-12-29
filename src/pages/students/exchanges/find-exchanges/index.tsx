@@ -34,8 +34,7 @@ export function Exchanges() {
   };
 
   const handleEdit = (id: string) => {
-    console.log('llll');
-    navigate(`/${user?.role}/exchange/${id}`);
+    navigate(`/${user?.role}/exchanges/${id}`);
   };
 
   const columns = exchangeColumns({ handleEdit });

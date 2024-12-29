@@ -14,7 +14,7 @@ export default function SubmitOffer() {
   const navigate = useNavigate();
 
   const redirectToExchageOffer = () => {
-    navigate('/student/exchange/new');
+    navigate('/student/exchanges/new');
   };
 
   return (

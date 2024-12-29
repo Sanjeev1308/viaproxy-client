@@ -1,4 +1,4 @@
-import Dashboard from '@/pages/customers/dashboard';
+import Dashboard from '@/pages/students/dashboard';
 import { IRoutes } from './types';
 
 export const adminRoutes: IRoutes[] = [
