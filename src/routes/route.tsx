@@ -11,6 +11,7 @@ import HowItWorks from '@/pages/students/exchanges/how-it-works';
 import SubmitOffer from '@/pages/students/exchanges/submit-an-offer';
 import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-exchange';
 import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
+import ExchangeDetails from '@/pages/students/exchanges/submit-an-offer/view-exchange';
 import Chats from '@/pages/students/messaging';
 import { Route, Routes } from 'react-router-dom';
 
@@ -54,16 +55,28 @@ export default function AppRoutes() {
 
       <Route path="/student" element={<App />}>
         <Route path="dashboard" element={<Dashboard />} />
-        <Route path="how-it-works" element={<HowItWorks />} />
+        <Route path="blogs" element={<ComingSoon />} />
         <Route path="chats" element={<Chats />} />
 
         <Route path="exchanges">
           <Route index element={<Exchanges />} />
+          <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="legal-info" element={<ComingSoon />} />
           <Route path="me" element={<ComingSoon />} />
           <Route path="submit-an-offer" element={<SubmitOffer />} />
           <Route path="new" element={<NewExchangeOffer />} />
+          <Route path="view/:id" element={<ExchangeDetails />} />
           <Route path=":id" element={<EditExchangeOffer />} />
+        </Route>
+
+        <Route path="donations">
+          <Route index element={<ComingSoon />} />
+          <Route path="me" element={<ComingSoon />} />
+        </Route>
+
+        <Route path="sales">
+          <Route index element={<ComingSoon />} />
+          <Route path="me" element={<ComingSoon />} />
         </Route>
       </Route>
 

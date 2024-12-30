@@ -1,13 +1,15 @@
 import { SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
+import { useActions } from '@/hooks/useActions';
 import { LogOut } from 'lucide-react';
 
 export function NavUser() {
   // const { isMobile } = useSidebar();
+  const { logout } = useActions();
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <SidebarMenuButton>
+        <SidebarMenuButton onClick={() => logout()}>
           <LogOut />
           Log out
         </SidebarMenuButton>

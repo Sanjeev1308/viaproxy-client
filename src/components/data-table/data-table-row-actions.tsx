@@ -15,9 +15,10 @@ import { Edit, Eye, MoreHorizontal, Trash } from 'lucide-react';
 interface DataTableRowActionsProps {
   row: Row<any>;
   handleEdit: (id: string) => void;
+  handleView: (id: string) => void;
 }
 
-export function DataTableRowActions({ row, handleEdit }: DataTableRowActionsProps) {
+export function DataTableRowActions({ row, handleEdit, handleView }: DataTableRowActionsProps) {
   const { setOpen, setCurrentRow } = useActions();
 
   return (
@@ -30,7 +31,7 @@ export function DataTableRowActions({ row, handleEdit }: DataTableRowActionsProp
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem onClick={() => {}}>
+          <DropdownMenuItem onClick={() => handleView(row.original._id)}>
             View
             <DropdownMenuShortcut>
               <Eye size={16} />

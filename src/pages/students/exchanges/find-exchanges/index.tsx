@@ -47,7 +47,11 @@ export function Exchanges() {
     navigate(`/${user?.role}/exchanges/${id}`);
   };
 
-  const columns = exchangeColumns({ handleEdit });
+  const handleView = (id: string) => {
+    navigate(`/${user?.role}/exchanges/view/${id}`);
+  };
+
+  const columns = exchangeColumns({ handleEdit, handleView });
 
   return (
     <>

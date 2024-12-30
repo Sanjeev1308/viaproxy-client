@@ -3,7 +3,10 @@ import { Button } from '@/components/ui/button';
 const EcoSolidarityPartners = () => {
   return (
     <div className="container mx-auto px-4 py-12">
-      <h2 className="text-3xl font-semibold text-center mb-12">Eco-Solidarity Partners</h2>
+      <div className="text-center mb-12">
+        <h2 className="text-3xl font-bold text-gray-800">Eco-Solidarity Partners</h2>
+        {/* <p className="text-gray-600 mt-2">Handpicked items just for you, showcasing the best of the season.</p> */}
+      </div>
 
       {/* Partner Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">

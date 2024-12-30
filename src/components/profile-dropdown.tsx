@@ -38,6 +38,9 @@ export function ProfileDropdown() {
         <DropdownMenuGroup>
           <DropdownMenuItem>Profile</DropdownMenuItem>
         </DropdownMenuGroup>
+        <DropdownMenuGroup>
+          <DropdownMenuItem>Social Networks</DropdownMenuItem>
+        </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem onClick={() => logout()}>Log out</DropdownMenuItem>
       </DropdownMenuContent>

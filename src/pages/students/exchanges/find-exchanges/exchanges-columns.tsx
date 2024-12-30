@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { Exchanges } from './data/schema';
 
-export const exchangeColumns = ({ handleEdit }: any): ColumnDef<Exchanges>[] => [
+export const exchangeColumns = ({ handleEdit, handleView }: any): ColumnDef<Exchanges>[] => [
   {
     id: 'select',
     header: ({ table }) => (
@@ -66,7 +66,7 @@ export const exchangeColumns = ({ handleEdit }: any): ColumnDef<Exchanges>[] => 
   },
   {
     id: 'actions',
-    cell: ({ row }) => <DataTableRowActions row={row} handleEdit={handleEdit} />,
+    cell: ({ row }) => <DataTableRowActions row={row} handleEdit={handleEdit} handleView={handleView} />,
     meta: {
       className: cn(
         'sticky md:table-cell right-0 z-10 rounded-tl',

@@ -7,8 +7,7 @@ const featuredItems = [
     id: 1,
     title: 'Exchange 1',
     description: 'A great opportunity to exchange your unwanted product.',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://via.placeholder.com/400',
     startDate: '2024-01-01',
     endDate: '2024-12-31',
   },
@@ -16,8 +15,7 @@ const featuredItems = [
     id: 2,
     title: 'Excahnge 2',
     description: 'Offer your services for a great exchange deal.',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://via.placeholder.com/400',
     startDate: '2024-02-01',
     endDate: '2024-11-30',
   },
@@ -25,8 +23,7 @@ const featuredItems = [
     id: 3,
     title: 'Exchange 3',
     description: 'A great opportunity to exchange your unwanted product.',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://via.placeholder.com/400',
     startDate: '2024-01-01',
     endDate: '2024-12-31',
   },
@@ -34,8 +31,7 @@ const featuredItems = [
     id: 4,
     title: 'Exchange 4',
     description: 'Offer your services for a great exchange deal.',
-    image:
-      'https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D',
+    image: 'https://via.placeholder.com/400',
     startDate: '2024-02-01',
     endDate: '2024-11-30',
   },
