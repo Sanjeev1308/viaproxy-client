@@ -6,9 +6,9 @@ export const ApiURL = {
 
   GET_USERS: 'users',
 
-  GET_OFFERS: ({ page, limit, sort, offerTitle, proposedItem }: any) => {
+  GET_OFFERS: (offerType: string, { page, limit, sort, offerTitle, proposedItem }: any) => {
     const proposedItemQuery = Array.isArray(proposedItem) ? proposedItem.join(',') : proposedItem;
-    let url = `offers?page=${page}&limit=${limit}`;
+    let url = `offers?page=${page}&limit=${limit}&exchangeType=${offerType}`;
     if (offerTitle) {
       url = url + `&search=${offerTitle}`;
     }
@@ -24,7 +24,7 @@ export const ApiURL = {
   },
   GET_MINE_OFFERS: ({ page, sort, limit, offerTitle, proposedItem }: any) => {
     const proposedItemQuery = Array.isArray(proposedItem) ? proposedItem.join(',') : proposedItem;
-    let url = `offers?page=${page}&limit=${limit}`;
+    let url = `offers/me?page=${page}&limit=${limit}`;
     if (offerTitle) {
       url = url + `&search=${offerTitle}`;
     }

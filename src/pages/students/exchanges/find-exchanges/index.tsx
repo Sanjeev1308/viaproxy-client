@@ -4,7 +4,7 @@ import { DataTableActionDialogs } from '@/components/data-table/data-table-actio
 import { Main } from '@/components/layout/main';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Skeleton } from '@/components/ui/skeleton';
-import { useAllOffers, useDeleteOfferById } from '@/hooks/api/offer.rq';
+import { useAllExchangeOffers, useDeleteOfferById } from '@/hooks/api/offer.rq';
 import { useDataTable } from '@/hooks/use-data-table';
 import { useToast } from '@/hooks/use-toast';
 import { useActions } from '@/hooks/useActions';
@@ -25,7 +25,7 @@ export function Exchanges() {
       initialPageSize: 10,
     });
 
-  const { data, isLoading } = useAllOffers(queryParams);
+  const { data, isLoading } = useAllExchangeOffers(queryParams);
   const { mutateAsync, isLoading: isOfferDeleteLoading } = useDeleteOfferById();
 
   useEffect(() => {

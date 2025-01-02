@@ -6,6 +6,7 @@ import { Register } from '@/pages/auth/register';
 import { VerifyEmail } from '@/pages/auth/verify-email';
 import LandingPage from '@/pages/landing-page';
 import Dashboard from '@/pages/students/dashboard';
+import { Donations } from '@/pages/students/donations/find-donations';
 import { Exchanges } from '@/pages/students/exchanges/find-exchanges';
 import HowItWorks from '@/pages/students/exchanges/how-it-works';
 import { MyExchanges } from '@/pages/students/exchanges/my-exchanges';
@@ -15,6 +16,7 @@ import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-e
 import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
 import ExchangeDetails from '@/pages/students/exchanges/submit-an-offer/view-exchange';
 import Chats from '@/pages/students/messaging';
+import { Sales } from '@/pages/students/sales/find-sales';
 import { Route, Routes } from 'react-router-dom';
 
 // const FallbackComponent = () => <div>Page Not Available</div>;
@@ -77,12 +79,12 @@ export default function AppRoutes() {
         </Route>
 
         <Route path="donations">
-          <Route index element={<ComingSoon />} />
+          <Route index element={<Donations />} />
           <Route path="me" element={<ComingSoon />} />
         </Route>
 
         <Route path="sales">
-          <Route index element={<ComingSoon />} />
+          <Route index element={<Sales />} />
           <Route path="me" element={<ComingSoon />} />
         </Route>
       </Route>

@@ -24,10 +24,24 @@ export function useDeleteOfferById(): UseMutationResult<any, ErrorModel, string,
   });
 }
 
-export function useAllOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
+export function useAllExchangeOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
-    queryKey: ['getAllOffers', page, limit, sort, filter],
-    queryFn: () => OfferService.getInstance().getAllOffers({ page, limit, sort, filter }),
+    queryKey: ['getAllExchangeOffers', page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllOffers('exchange', { page, limit, sort, filter }),
+  });
+}
+
+export function useAllDonationOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
+  return useQuery<any, ErrorModel>({
+    queryKey: ['getAllDonationOffers', page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllOffers('donate', { page, limit, sort, filter }),
+  });
+}
+
+export function useAllSalesOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
+  return useQuery<any, ErrorModel>({
+    queryKey: ['getAllSalesOffers', page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllOffers('sale', { page, limit, sort, filter }),
   });
 }
 

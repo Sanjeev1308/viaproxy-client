@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -8,21 +7,26 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { useActions } from '@/hooks/useActions';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { GlobeIcon } from 'lucide-react';
 
-export default function LanguageSwitcher({ onLocaleChange, currentLocale }: any) {
-  const languages = [
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'fr', name: 'Français', flag: '🇫🇷' },
-  ];
+const languages = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+];
+
+export default function LanguageSwitcher() {
+  const { lang } = useTypedSelector((state) => state.appSettings);
+  const { setLanguage } = useActions();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="icon" className="flex items-center space-x-2">
+        <Button variant="ghost" size="icon" className="flex items-center">
           <GlobeIcon />
           <span className="hidden md:inline-block text-sm">
-            {languages.find((lang) => lang.code === currentLocale)?.flag}
+            {languages.find((language) => language.code === lang)?.flag}
           </span>
         </Button>
       </DropdownMenuTrigger>
@@ -33,13 +37,13 @@ export default function LanguageSwitcher({ onLocaleChange, currentLocale }: any)
           <DropdownMenuItem
             key={language.code}
             className="flex items-center justify-between"
-            onClick={() => onLocaleChange(language.code)}
+            onClick={() => setLanguage(language.code)}
           >
             <span className="flex items-center gap-2">
               <span>{language.flag}</span>
               <span>{language.name}</span>
             </span>
-            {currentLocale === language.code && (
+            {lang === language.code && (
               <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <polyline points="20 6 9 17 4 12"></polyline>
               </svg>

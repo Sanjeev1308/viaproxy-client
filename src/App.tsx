@@ -1,5 +1,6 @@
 import { AppSidebar } from '@/components/layout/app-sidebar';
 import { Header } from '@/components/layout/header';
+import LanguageSwitcher from '@/components/layout/language-switcher';
 import { ProfileDropdown } from '@/components/profile-dropdown';
 import { SidebarProvider } from '@/components/ui/sidebar';
 import { cn } from '@/lib/utils';
@@ -23,7 +24,7 @@ function App() {
       >
         <Header>
           <div className="ml-auto flex items-center space-x-4">
-            {/* <LanguageSwitcher /> */}
+            <LanguageSwitcher />
             <ProfileDropdown />
           </div>
         </Header>

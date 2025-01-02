@@ -3,73 +3,73 @@ import { NavGroup } from '../types';
 
 export const studentRoutes: NavGroup[] = [
   {
-    title: 'Dashboard',
+    title: 'DASHBOARD',
     url: '/student/dashboard',
     icon: Home,
   },
   {
-    title: 'Messaging',
+    title: 'MESSAGING',
     url: '/student/chats',
     icon: MessageCircle,
   },
   {
-    title: 'Blogs',
+    title: 'BLOGS',
     url: '/student/blogs',
     icon: Book,
   },
   {
-    title: 'Exchanges',
+    title: 'EXCHANGES',
     icon: ArrowRightLeft,
     url: '',
     items: [
       {
-        title: 'How does it works?',
+        title: 'HOW_DOES_IT_WORKS',
         url: '/student/exchanges/how-it-works',
       },
       {
-        title: 'Submit an offer',
+        title: 'SUBMIT_AN_OFFER',
         url: '/student/exchanges/submit-an-offer',
       },
       {
-        title: 'Find Exchanges',
+        title: 'FIND_EXCHANGES',
         url: '/student/exchanges',
       },
       {
-        title: 'My Exchanges',
+        title: 'MY_EXCHANGES',
         url: '/student/exchanges/me',
       },
       {
-        title: 'Legal Information',
+        title: 'LEGAL_INFO',
         url: '/student/exchanges/legal-info',
       },
     ],
   },
   {
-    title: 'Donation',
+    title: 'DONATIONS',
     icon: Gift,
     url: '',
     items: [
       {
-        title: 'Find Donations',
+        title: 'FIND_DONATIONS',
         url: '/student/donations',
       },
       {
-        title: 'My Donations',
+        title: 'MY_DONATIONS',
         url: '/student/donations/me',
       },
     ],
   },
   {
-    title: 'Sales',
+    title: 'SALES',
     icon: Currency,
     url: '',
     items: [
       {
-        title: 'Find Sales',
+        title: 'FIND_SALES',
         url: '/student/sales',
       },
       {
-        title: 'My Sales',
+        title: 'MY_SALES',
         url: '/student/sales/me',
       },
     ],
