@@ -8,6 +8,8 @@ import LandingPage from '@/pages/landing-page';
 import Dashboard from '@/pages/students/dashboard';
 import { Exchanges } from '@/pages/students/exchanges/find-exchanges';
 import HowItWorks from '@/pages/students/exchanges/how-it-works';
+import { MyExchanges } from '@/pages/students/exchanges/my-exchanges';
+import MineExchangeOfferDetails from '@/pages/students/exchanges/my-exchanges/view-exchange';
 import SubmitOffer from '@/pages/students/exchanges/submit-an-offer';
 import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-exchange';
 import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
@@ -62,11 +64,16 @@ export default function AppRoutes() {
           <Route index element={<Exchanges />} />
           <Route path="how-it-works" element={<HowItWorks />} />
           <Route path="legal-info" element={<ComingSoon />} />
-          <Route path="me" element={<ComingSoon />} />
+
+          <Route path="me">
+            <Route index element={<MyExchanges />} />
+            <Route path="view/:id" element={<MineExchangeOfferDetails />} />
+            <Route path=":id" element={<EditExchangeOffer />} />
+          </Route>
+
           <Route path="submit-an-offer" element={<SubmitOffer />} />
           <Route path="new" element={<NewExchangeOffer />} />
           <Route path="view/:id" element={<ExchangeDetails />} />
-          <Route path=":id" element={<EditExchangeOffer />} />
         </Route>
 
         <Route path="donations">

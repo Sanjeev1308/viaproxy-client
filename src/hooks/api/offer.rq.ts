@@ -24,10 +24,17 @@ export function useDeleteOfferById(): UseMutationResult<any, ErrorModel, string,
   });
 }
 
-export function useAllOffers(): UseQueryResult<any, ErrorModel> {
+export function useAllOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
-    queryKey: ['getAllOffers'],
-    queryFn: () => OfferService.getInstance().getAllOffers(),
+    queryKey: ['getAllOffers', page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllOffers({ page, limit, sort, filter }),
+  });
+}
+
+export function useAllMineOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
+  return useQuery<any, ErrorModel>({
+    queryKey: ['getAllMineOffers', page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllMineOffers({ page, limit, sort, filter }),
   });
 }
 

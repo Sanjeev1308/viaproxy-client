@@ -1,13 +1,12 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DataTableColumnHeader } from '@/components/data-table/data-table-column-header';
 import { DataTableRowActions } from '@/components/data-table/data-table-row-actions';
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
 import { callTypes } from './data/data';
-import { Exchanges } from './data/schema';
+import { ExchangeColumnsProps, Exchanges } from './data/schema';
 
-export const exchangeColumns = ({ handleEdit, handleView, isDelete = true }: any): ColumnDef<Exchanges>[] => [
+export const exchangeColumns = ({ handleEdit, handleView, isDelete }: ExchangeColumnsProps): ColumnDef<Exchanges>[] => [
   // {
   //   id: 'select',
   //   header: ({ table }) => (

@@ -1,9 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DataTablePagination } from '@/components/data-table/data-table-pagination';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import {
   ColumnDef,
   ColumnFiltersState,
-  RowData,
   SortingState,
   VisibilityState,
   flexRender,
@@ -16,76 +16,121 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useState } from 'react';
-// import { DataTableToolbar } from '@/features/exchanges/components/data-table-toolbar'
-
-declare module '@tanstack/react-table' {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface ColumnMeta<TData extends RowData, TValue> {
-    className: string;
-  }
-}
+import { DataTableToolbar } from './data-table-toolbar';
 
 interface DataTableProps<T> {
   columns: ColumnDef<T>[];
   data: T[];
+  mode?: 'client' | 'server';
+  pageCount?: number;
+  onPaginationChange?: (pageIndex: number, pageSize: number) => void;
+  onSortingChange?: (sorting: SortingState) => void;
+  onFiltersChange?: (filters: ColumnFiltersState) => void;
+  isLoading?: boolean;
+  pagination: {
+    pageIndex: number;
+    pageSize: number;
+  };
+  sort: SortingState;
+  filter: ColumnFiltersState;
+  filterFields?: any;
 }
 
-export function DataTable<T>({ columns, data }: DataTableProps<T>) {
+export function DataTable<T>({
+  columns,
+  data,
+  mode = 'client',
+  pageCount: serverPageCount,
+  onPaginationChange,
+  onSortingChange,
+  onFiltersChange,
+  isLoading = false,
+  pagination,
+  sort,
+  filter,
+  filterFields,
+}: DataTableProps<T>) {
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [sorting, setSorting] = useState<SortingState>([]);
 
+  const isServerMode = mode === 'server';
+
   const table = useReactTable({
     data,
     columns,
+    pageCount: isServerMode ? serverPageCount : undefined,
     state: {
-      sorting,
+      sorting: sort,
       columnVisibility,
       rowSelection,
-      columnFilters,
+      columnFilters: filter,
+      pagination,
     },
     enableRowSelection: true,
+    manualPagination: isServerMode,
+    manualSorting: isServerMode,
+    manualFiltering: isServerMode,
     onRowSelectionChange: setRowSelection,
-    onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
+    onSortingChange: (updater) => {
+      const newSorting = typeof updater === 'function' ? updater(sorting) : updater;
+      setSorting(newSorting);
+      if (isServerMode) onSortingChange?.(newSorting);
+    },
+    onColumnFiltersChange: (updater) => {
+      const newFilters = typeof updater === 'function' ? updater(columnFilters) : updater;
+      setColumnFilters(newFilters);
+      if (isServerMode) onFiltersChange?.(newFilters);
+    },
     onColumnVisibilityChange: setColumnVisibility,
+    onPaginationChange: (updater: any) => {
+      const newPagination = typeof updater === 'function' ? updater(pagination) : updater;
+      if (isServerMode) onPaginationChange?.(newPagination.pageIndex, newPagination.pageSize);
+    },
     getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFacetedRowModel: getFacetedRowModel(),
-    getFacetedUniqueValues: getFacetedUniqueValues(),
+    getFilteredRowModel: isServerMode ? undefined : getFilteredRowModel(),
+    getPaginationRowModel: isServerMode ? undefined : getPaginationRowModel(),
+    getSortedRowModel: isServerMode ? undefined : getSortedRowModel(),
+    getFacetedRowModel: isServerMode ? undefined : getFacetedRowModel(),
+    getFacetedUniqueValues: isServerMode ? undefined : getFacetedUniqueValues(),
   });
 
   return (
     <div className="space-y-4">
-      {/* <DataTableToolbar table={table} /> */}
+      {filterFields && <DataTableToolbar table={table} filterFields={filterFields} />}
       <div className="rounded-md border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id} className="group/row">
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead
-                      key={header.id}
-                      colSpan={header.colSpan}
-                      className={header.column.columnDef.meta?.className ?? ''}
-                    >
-                      {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                    </TableHead>
-                  );
-                })}
+                {headerGroup.headers.map((header) => (
+                  <TableHead
+                    key={header.id}
+                    colSpan={header.colSpan}
+                    // className={header.column.columnDef.meta?.className ?? ''}
+                  >
+                    {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                  </TableHead>
+                ))}
               </TableRow>
             ))}
           </TableHeader>
           <TableBody>
-            {table.getRowModel().rows?.length ? (
+            {isLoading ? (
+              <TableRow>
+                <TableCell colSpan={columns.length} className="h-24 text-center">
+                  Loading...
+                </TableCell>
+              </TableRow>
+            ) : table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
                 <TableRow key={row.id} data-state={row.getIsSelected() && 'selected'} className="group/row">
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id} className={cell.column.columnDef.meta?.className ?? ''}>
+                    <TableCell
+                      key={cell.id}
+                      // className={cell.column.columnDef.meta?.className ?? ''}
+                    >
                       {flexRender(cell.column.columnDef.cell, cell.getContext())}
                     </TableCell>
                   ))}
@@ -101,7 +146,7 @@ export function DataTable<T>({ columns, data }: DataTableProps<T>) {
           </TableBody>
         </Table>
       </div>
-      <DataTablePagination table={table} />
+      <DataTablePagination table={table} isCheckboxSelection={false} />
     </div>
   );
 }

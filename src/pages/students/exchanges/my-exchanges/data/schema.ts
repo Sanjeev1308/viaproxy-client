@@ -30,23 +30,8 @@ export type Exchanges = z.infer<typeof exchangeSchema>;
 
 export const exchangeListSchema = z.array(exchangeSchema);
 
-export const filterFields = [
-  {
-    label: 'Title',
-    value: 'offerTitle',
-    placeholder: 'Search by title...',
-  },
-  {
-    label: 'Proposed Item Type',
-    value: 'proposedItem',
-    options: [
-      { value: 'service', lable: 'Service' },
-      { value: 'product', lable: 'Product' },
-      { value: 'buy', lable: 'Buy' },
-    ].map((option) => ({
-      label: option.lable,
-      value: option.value,
-      // withCount: true,
-    })),
-  },
-];
+export interface ExchangeColumnsProps {
+  handleEdit: (id: string) => void;
+  handleView: (id: string) => void;
+  isDelete: boolean;
+}

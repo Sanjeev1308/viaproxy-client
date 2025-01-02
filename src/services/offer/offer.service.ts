@@ -15,8 +15,15 @@ export class OfferService extends BaseService {
     return this.postFormData(url, data);
   }
 
-  getAllOffers(): Promise<IOffer> {
-    const url = ApiURL.GET_OFFERS;
+  getAllOffers({ page, limit, sort, filter }: any): Promise<IOffer> {
+    const { offerTitle, proposedItem } = filter;
+    const url = ApiURL.GET_OFFERS({ page, limit, sort, offerTitle, proposedItem });
+    return this.get(url);
+  }
+
+  getAllMineOffers({ page, limit, sort, filter }: any): Promise<IOffer> {
+    const { offerTitle, proposedItem } = filter;
+    const url = ApiURL.GET_MINE_OFFERS({ page, limit, sort, offerTitle, proposedItem });
     return this.get(url);
   }
 

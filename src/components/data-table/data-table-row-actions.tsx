@@ -16,9 +16,10 @@ interface DataTableRowActionsProps {
   row: Row<any>;
   handleEdit: (id: string) => void;
   handleView: (id: string) => void;
+  isDelete?: boolean;
 }
 
-export function DataTableRowActions({ row, handleEdit, handleView }: DataTableRowActionsProps) {
+export function DataTableRowActions({ row, handleEdit, handleView, isDelete = true }: DataTableRowActionsProps) {
   const { setOpen, setCurrentRow } = useActions();
 
   return (
@@ -31,31 +32,40 @@ export function DataTableRowActions({ row, handleEdit, handleView }: DataTableRo
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-[160px]">
-          <DropdownMenuItem onClick={() => handleView(row.original._id)}>
-            View
-            <DropdownMenuShortcut>
-              <Eye size={16} />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => handleEdit(row.original._id)}>
-            Edit
-            <DropdownMenuShortcut>
-              <Edit size={16} />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
-          <DropdownMenuSeparator />
-          <DropdownMenuItem
-            onClick={() => {
-              setCurrentRow(row.original);
-              setOpen('delete');
-            }}
-            className="!text-red-500"
-          >
-            Delete
-            <DropdownMenuShortcut>
-              <Trash size={16} />
-            </DropdownMenuShortcut>
-          </DropdownMenuItem>
+          {handleView && (
+            <DropdownMenuItem onClick={() => handleView(row.original._id)}>
+              View
+              <DropdownMenuShortcut>
+                <Eye size={16} />
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+          )}
+
+          {handleEdit && (
+            <DropdownMenuItem onClick={() => handleEdit(row.original._id)}>
+              Edit
+              <DropdownMenuShortcut>
+                <Edit size={16} />
+              </DropdownMenuShortcut>
+            </DropdownMenuItem>
+          )}
+          {isDelete && (
+            <>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem
+                onClick={() => {
+                  setCurrentRow(row.original);
+                  setOpen('delete');
+                }}
+                className="!text-red-500"
+              >
+                Delete
+                <DropdownMenuShortcut>
+                  <Trash size={16} />
+                </DropdownMenuShortcut>
+              </DropdownMenuItem>
+            </>
+          )}
         </DropdownMenuContent>
       </DropdownMenu>
     </>

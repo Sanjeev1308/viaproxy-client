@@ -42,7 +42,9 @@ export function ProfileDropdown() {
           <DropdownMenuItem>Social Networks</DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem onClick={() => logout()}>Log out</DropdownMenuItem>
+        <DropdownMenuItem className="!text-red-500" onClick={() => logout()}>
+          Log out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
