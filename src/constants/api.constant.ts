@@ -41,4 +41,11 @@ export const ApiURL = {
   GET_OFFER_BY_ID: (id: string) => `offers/${id}`,
   CREATE_OFFER: 'offers/offer',
   DELETE_OFFER: (id: string) => `offers/${id}`,
+
+  GET_ALL_CONVERSATIONS: 'conversations',
+  GET_ALL_MESSAGES: 'messages',
+  GET_CONVERSATION_BY_USER_ID: (userId: string) => `conversations/${userId}`,
+  GET_MESSAGES_BY_CONVERSATION_ID: (conversationId: string) => `messages/${conversationId}`,
+  SEND_MESSAGE: 'messages',
+  CREATE_CONVERSATION: 'conversations',
 };
