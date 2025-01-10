@@ -4,7 +4,91 @@ export const ApiURL = {
   REGISTER: 'auth/register',
   VERIFY_EMAIL: 'auth/verify-email',
 
-  GET_USERS: 'users',
+  GET_USERS: ({ page, limit, sort, email, role }: any) => {
+    const roleQuery = Array.isArray(role) ? role.join(',') : role;
+    let url = `users?page=${page}&limit=${limit}`;
+    if (email) {
+      url = url + `&search=${email}`;
+    }
+
+    if (role) {
+      url = url + `&role=${roleQuery}`;
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_USER_BY_ID: (id: string) => `users/${id}`,
+  CREATE_USER: 'users/user',
+  DELETE_USER: (id: string) => `users/${id}`,
+  GET_USERS_ADVANCE_SEARCH: 'users/advance/search',
+
+  GET_PRODUCTS: ({ page, limit, sort, name }: any) => {
+    let url = `products?page=${page}&limit=${limit}`;
+    if (name) {
+      url = url + `&search=${name}`;
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_PRODUCTS_BY_ID: (id: string) => `products/${id}`,
+  CREATE_PRODUCT: 'products/product',
+  DELETE_PRODUCT: (id: string) => `products/${id}`,
+
+  GET_SERVICES: ({ page, limit, sort, name }: any) => {
+    let url = `services?page=${page}&limit=${limit}`;
+    if (name) {
+      url = url + `&search=${name}`;
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_SERVICE_BY_ID: (id: string) => `services/${id}`,
+  CREATE_SERVICE: 'services/service',
+  DELETE_SERVICE: (id: string) => `services/${id}`,
+
+  GET_CATEGORIES: ({ page, limit, sort, name, categoryType }: any) => {
+    const categoryTypeQuery = Array.isArray(categoryType) ? categoryType.join(',') : categoryType;
+    let url = `categories?page=${page}&limit=${limit}`;
+    if (name) {
+      url = url + `&search=${name}`;
+    }
+
+    if (categoryTypeQuery) {
+      url = url + `&categoryType=${categoryTypeQuery}`;
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_CATEGORY_BY_ID: (id: string) => `categories/${id}`,
+  CREATE_CATEGORY: 'categories/category',
+  DELETE_CATEGORY: (id: string) => `categories/${id}`,
+
+  GET_ADS: ({ page, limit, sort, name }: any) => {
+    let url = `ads?page=${page}&limit=${limit}`;
+    if (name) {
+      url = url + `&search=${name}`;
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_ADS_BY_ID: (id: string) => `ads/${id}`,
+  CREATE_ADS: 'ads/ads',
+  DELETE_ADS: (id: string) => `ads/${id}`,
 
   GET_OFFERS: (offerType: string, { page, limit, sort, offerTitle, proposedItem }: any) => {
     const proposedItemQuery = Array.isArray(proposedItem) ? proposedItem.join(',') : proposedItem;

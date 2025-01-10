@@ -1,5 +1,28 @@
 import App from '@/App';
 import ComingSoon from '@/components/coming-soon';
+import { Ads } from '@/pages/admin/ads';
+import AddAds from '@/pages/admin/ads/add';
+import EditAds from '@/pages/admin/ads/edit';
+import AdsView from '@/pages/admin/ads/view';
+import { Categories } from '@/pages/admin/category';
+import AddCategory from '@/pages/admin/category/add';
+import EditCategory from '@/pages/admin/category/edit';
+import CategoryView from '@/pages/admin/category/view';
+import { Products } from '@/pages/admin/product';
+import AddProduct from '@/pages/admin/product/add';
+import EditProduct from '@/pages/admin/product/edit';
+import ProductView from '@/pages/admin/product/view';
+import { Services } from '@/pages/admin/service';
+import AddService from '@/pages/admin/service/add';
+import EditService from '@/pages/admin/service/edit';
+import ViewService from '@/pages/admin/service/view';
+import { Transactions } from '@/pages/admin/transaction';
+import AddTransaction from '@/pages/admin/transaction/add';
+import EditTransactions from '@/pages/admin/transaction/edit';
+import TransactionView from '@/pages/admin/transaction/view';
+import { Users } from '@/pages/admin/users';
+import EditUser from '@/pages/admin/users/edit';
+import UsersDetail from '@/pages/admin/users/view';
 import ForgotPassword from '@/pages/auth/forgot-password';
 import { Login } from '@/pages/auth/login';
 import { Register } from '@/pages/auth/register';
@@ -90,10 +113,49 @@ export default function AppRoutes() {
       </Route>
 
       <Route path="/admin" element={<App />}>
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="users" element={<ComingSoon />} />
-        <Route path="promotions" element={<ComingSoon />} />
-        <Route path="ads" element={<ComingSoon />} />
+        <Route path="dashboard" element={<ComingSoon />} />
+        <Route path="chats" element={<Chats />} />
+
+        <Route path="users">
+          <Route index element={<Users />} />
+          <Route path="view/:id" element={<UsersDetail />} />
+          <Route path=":id" element={<EditUser />} />
+        </Route>
+
+        <Route path="services">
+          <Route index element={<Services />} />
+          <Route path="new" element={<AddService />} />
+          <Route path="view/:id" element={<ViewService />} />
+          <Route path=":id" element={<EditService />} />
+        </Route>
+
+        <Route path="products">
+          <Route index element={<Products />} />
+          <Route path="new" element={<AddProduct />} />
+          <Route path="view/:id" element={<ProductView />} />
+          <Route path=":id" element={<EditProduct />} />
+        </Route>
+
+        <Route path="categories">
+          <Route index element={<Categories />} />
+          <Route path="new" element={<AddCategory />} />
+          <Route path="view/:id" element={<CategoryView />} />
+          <Route path=":id" element={<EditCategory />} />
+        </Route>
+
+        <Route path="transactions">
+          <Route index element={<Transactions />} />
+          <Route path="new" element={<AddTransaction />} />
+          <Route path="view/:id" element={<TransactionView />} />
+          <Route path=":id" element={<EditTransactions />} />
+        </Route>
+
+        <Route path="ads">
+          <Route index element={<Ads />} />
+          <Route path="new" element={<AddAds />} />
+          <Route path="view/:id" element={<AdsView />} />
+          <Route path=":id" element={<EditAds />} />
+        </Route>
       </Route>
 
       <Route path="/merchant" element={<App />}>

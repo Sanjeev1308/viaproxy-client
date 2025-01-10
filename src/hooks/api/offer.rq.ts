@@ -24,6 +24,16 @@ export function useDeleteOfferById(): UseMutationResult<any, ErrorModel, string,
   });
 }
 
+export function useAllOffers(
+  exchangeType: string,
+  { page, limit, sort, filter }: any,
+): UseQueryResult<any, ErrorModel> {
+  return useQuery<any, ErrorModel>({
+    queryKey: ['getAllOffers', exchangeType, page, limit, sort, filter],
+    queryFn: () => OfferService.getInstance().getAllOffers(exchangeType, { page, limit, sort, filter }),
+  });
+}
+
 export function useAllExchangeOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
     queryKey: ['getAllExchangeOffers', page, limit, sort, filter],

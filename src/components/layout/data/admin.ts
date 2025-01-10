@@ -1,4 +1,4 @@
-import { Gift, Home, Settings2, User } from 'lucide-react';
+import { CreditCard, Grid, Home, Megaphone, MessageCircle, Package, Settings, User } from 'lucide-react';
 import { NavGroup } from '../types';
 
 export const adminRoutes: NavGroup[] = [
@@ -8,79 +8,38 @@ export const adminRoutes: NavGroup[] = [
     icon: Home,
   },
   {
-    title: 'Users',
+    title: 'Messaging',
+    url: '/admin/chats',
+    icon: MessageCircle,
+  },
+  {
+    title: 'Users Management',
     url: '/admin/users',
     icon: User,
   },
   {
-    title: 'Promotions',
-    url: '/admin/promotions',
-    icon: Gift,
+    title: 'Service Management',
+    url: '/admin/services',
+    icon: Settings,
   },
   {
-    title: 'Ads',
-    url: '/admin/ads',
-    icon: Settings2,
+    title: 'Product Management',
+    url: '/admin/products',
+    icon: Package,
   },
-  // {
-  //   title: 'Shops & Customers',
-  //   url: '',
-  //   icon: ShoppingBag,
-  //   items: [
-  //     {
-  //       title: 'Shops',
-  //       url: '/eco-citizen/shops',
-  //     },
-  //     {
-  //       title: 'Products',
-  //       url: '/eco-citizen/products',
-  //     },
-  //   ],
-  // },
-  // {
-  //   title: 'Promotions/Challenges',
-  //   icon: Settings,
-  //   url: '',
-  //   items: [
-  //     {
-  //       title: 'Proxy Checks',
-  //       url: '/eco-citizen/proxy-checks',
-  //     },
-  //     {
-  //       title: 'Promo Coupons',
-  //       url: '/eco-citizen/coupons',
-  //     },
-  //     {
-  //       title: 'Promotions',
-  //       url: '/eco-citizen/promotions',
-  //     },
-  //   ],
-  // },
-  //   {
-  //     title: 'Exchanges',
-  //     icon: ArrowRightLeft,
-  //     url: '',
-  //     items: [
-  //       {
-  //         title: 'Submit an offer',
-  //         url: '/eco-citizen/exchanges/submit-an-offer',
-  //       },
-  //       {
-  //         title: 'Find Exchanges',
-  //         url: '/eco-citizen/exchanges',
-  //       },
-  //       {
-  //         title: 'My Exchanges',
-  //         url: '/eco-citizen/exchanges/me',
-  //       },
-  //       // {
-  //       //   title: 'B2B Sales',
-  //       //   url: '/eco-citizen/exchange/b2b-sales',
-  //       // },
-  //       {
-  //         title: 'Legal Information',
-  //         url: '/eco-citizen/exchanges/legal-info',
-  //       },
-  //     ],
-  //   },
+  {
+    title: 'Category Management',
+    url: '/admin/categories',
+    icon: Grid,
+  },
+  {
+    title: 'Transaction Management',
+    url: '/admin/transactions',
+    icon: CreditCard,
+  },
+  {
+    title: 'Ads Management',
+    url: '/admin/ads',
+    icon: Megaphone,
+  },
 ];
