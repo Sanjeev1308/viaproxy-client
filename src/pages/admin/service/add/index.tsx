@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import ServiceForm from '@/features/services/components/service-form';
 import { useCreateService } from '@/hooks/api/service.rq';
 import { useToast } from '@/hooks/use-toast';
+import { objectToFormData } from '@/utils/form-data.utils';
 import { useNavigate } from 'react-router-dom';
 
 export default function AddService() {
@@ -14,8 +15,8 @@ export default function AddService() {
 
   const handleSubmit = async (data: any) => {
     try {
-      // const formData = objectToFormData(data);
-      await mutateAsync(data);
+      const formData = objectToFormData(data);
+      await mutateAsync(formData);
       navigate('/admin/services');
     } catch (error: any) {
       toast({

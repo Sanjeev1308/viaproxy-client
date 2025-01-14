@@ -55,15 +55,22 @@ export const ApiURL = {
   CREATE_SERVICE: 'services/service',
   DELETE_SERVICE: (id: string) => `services/${id}`,
 
-  GET_CATEGORIES: ({ page, limit, sort, name, categoryType }: any) => {
-    const categoryTypeQuery = Array.isArray(categoryType) ? categoryType.join(',') : categoryType;
+  GET_CATEGORIES: ({ page, limit, sort, filter }: any) => {
     let url = `categories?page=${page}&limit=${limit}`;
-    if (name) {
-      url = url + `&search=${name}`;
-    }
+    if (filter) {
+      const { name, categoryType, isSubcategory } = filter;
+      const categoryTypeQuery = Array.isArray(categoryType) ? categoryType.join(',') : categoryType;
+      if (name) {
+        url = url + `&search=${name}`;
+      }
 
-    if (categoryTypeQuery) {
-      url = url + `&categoryType=${categoryTypeQuery}`;
+      if (categoryTypeQuery) {
+        url = url + `&categoryType=${categoryTypeQuery}`;
+      }
+
+      if (isSubcategory !== undefined) {
+        url = url + `&isSubcategory=${isSubcategory}`;
+      }
     }
 
     if (sort) {
@@ -71,6 +78,7 @@ export const ApiURL = {
     }
     return url;
   },
+  GET_SUB_CATEGORY_BY_CATEGORY_ID: (id: string) => `categories/${id}/sub-category`,
   GET_CATEGORY_BY_ID: (id: string) => `categories/${id}`,
   CREATE_CATEGORY: 'categories/category',
   DELETE_CATEGORY: (id: string) => `categories/${id}`,
@@ -106,9 +114,9 @@ export const ApiURL = {
     }
     return url;
   },
-  GET_MINE_OFFERS: ({ page, sort, limit, offerTitle, proposedItem }: any) => {
+  GET_MINE_OFFERS: (offerType: string, { page, sort, limit, offerTitle, proposedItem }: any) => {
     const proposedItemQuery = Array.isArray(proposedItem) ? proposedItem.join(',') : proposedItem;
-    let url = `offers/me?page=${page}&limit=${limit}`;
+    let url = `offers/me?page=${page}&limit=${limit}&exchangeType=${offerType}`;
     if (offerTitle) {
       url = url + `&search=${offerTitle}`;
     }
@@ -125,6 +133,38 @@ export const ApiURL = {
   GET_OFFER_BY_ID: (id: string) => `offers/${id}`,
   CREATE_OFFER: 'offers/offer',
   DELETE_OFFER: (id: string) => `offers/${id}`,
+
+  GET_SENT_PROPOSALS: ({ page, limit, sort, filter }: any) => {
+    let url = `proposals/sent?page=${page}&limit=${limit}`;
+    if (filter) {
+      const { message } = filter;
+      if (message) {
+        url = url + `&search=${message}`;
+      }
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_RECIEVED_PROPOSALS: ({ page, limit, sort, filter }: any) => {
+    let url = `proposals/recieved?page=${page}&limit=${limit}`;
+    if (filter) {
+      const { message } = filter;
+      if (message) {
+        url = url + `&search=${message}`;
+      }
+    }
+
+    if (sort) {
+      url = url + `&sort=${sort}`;
+    }
+    return url;
+  },
+  GET_PROPOSAL_BY_ID: (id: string) => `proposals/${id}`,
+  CREATE_PROPOSAL: 'proposals/proposal',
+  DELETE_PROPOSAL: (id: string) => `proposals/${id}`,
 
   GET_ALL_CONVERSATIONS: 'conversations',
   GET_ALL_MESSAGES: 'messages',

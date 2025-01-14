@@ -16,8 +16,12 @@ export class CategoryService extends BaseService {
   }
 
   getAllCategories({ page, limit, sort, filter }: any): Promise<ICategory> {
-    const { name, categoryType } = filter;
-    const url = ApiURL.GET_CATEGORIES({ page, limit, sort, name, categoryType });
+    const url = ApiURL.GET_CATEGORIES({ page, limit, sort, filter });
+    return this.get(url);
+  }
+
+  getAllSubCategories(id: string): Promise<ICategory> {
+    const url = ApiURL.GET_SUB_CATEGORY_BY_CATEGORY_ID(id);
     return this.get(url);
   }
 

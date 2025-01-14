@@ -12,7 +12,7 @@ export class ProductService extends BaseService {
 
   createProduct(data: any): Promise<IProduct> {
     const url = ApiURL.CREATE_PRODUCT;
-    return this.post(url, data);
+    return this.postFormData(url, data);
   }
 
   getAllProducts({ page, limit, sort, filter }: any): Promise<IProduct> {

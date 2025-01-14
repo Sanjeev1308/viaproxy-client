@@ -35,6 +35,12 @@ export const categoriesColumns = ({ handleEdit, handleView, isDelete = true }: a
     enableSorting: false,
   },
   {
+    accessorKey: 'isSubcategory',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Is A SubCategory?" />,
+    cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('isSubcategory') ? 'Yes' : 'No'}</div>,
+    enableSorting: false,
+  },
+  {
     id: 'actions',
     cell: ({ row }) => (
       <DataTableRowActions row={row} handleEdit={handleEdit} handleView={handleView} isDelete={isDelete} />

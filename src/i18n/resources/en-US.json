@@ -13,5 +13,18 @@
   "MY_DONATIONS": "My Donations",
   "SALES": "Sales",
   "FIND_SALES": "Find Sales",
-  "MY_SALES": "My Sales"
+  "MY_SALES": "My Sales",
+  "PROPOSALS": "Proposals",
+  "PROPOSALS_SENT": "Proposals Sent",
+  "PROPOSALS_RECIEVED": "Proposals Recieved",
+
+  "HOW_DOES_IT_WORKS_SUBTITLE": "Discover how you can exchange products and services seamlessly with SwapyCampus.",
+  "STEP1": "Step 1",
+  "STEP1_SUBTITLE": "Click on Submit an Offer and provide detailed information about your exchange.",
+  "STEP2": "Step 2",
+  "STEP2_SUBTITLE": "Browse offers from other students to find the perfect match for your needs.",
+  "STEP3": "Step 3",
+  "STEP3_SUBTITLE": "Negotiate and finalize the exchange securely within the platform.",
+  "STEP4": "Step 4",
+  "STEP4_SUBTITLE": "Complete the exchange and enjoy the benefits of SwapyCampus."
 }

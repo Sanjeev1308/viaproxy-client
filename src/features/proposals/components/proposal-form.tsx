@@ -3,35 +3,35 @@ import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import CategoryDropdown from '@/features/dropdowns/components/category-dropdown';
 import SubCategoryDropdown from '@/features/dropdowns/components/sub-category-dropdown';
 import { useState } from 'react';
-import { productFormSchema } from '../data/product-form-schema';
+import { serviceFormSchema } from '../data/proposal-form-schema';
 
-export default function ProductForm({ values, handleOnSubmit, isLoading }: any) {
-  const [productCategoryId, setProductCategoryId] = useState('');
+export default function ProposalForm({ values, handleOnSubmit, isLoading }: any) {
+  const [serviceCategoryId, setServiceCategoryId] = useState('');
 
   const handleChange = (value: any) => {
-    setProductCategoryId(value.productCategoryId);
+    setServiceCategoryId(value.serviceCategoryId);
   };
 
   return (
     <AutoForm
-      formSchema={productFormSchema}
+      formSchema={serviceFormSchema}
       values={values}
       onValuesChange={handleChange}
       onSubmit={handleOnSubmit}
       fieldConfig={{
         image: { fieldType: 'file' },
         description: { fieldType: 'textarea' },
-        productCategoryId: {
+        serviceCategoryId: {
           renderParent({ children }: any) {
-            return <CategoryDropdown categoryType="product" {...children.props} />;
+            return <CategoryDropdown categoryType="service" {...children.props} />;
           },
         },
-        productSubCategoryId: {
+        serviceSubCategoryId: {
           renderParent({ children }: any) {
-            if (!productCategoryId) {
+            if (!serviceCategoryId) {
               return null;
             }
-            return <SubCategoryDropdown productCategoryId={productCategoryId} {...children.props} />;
+            return <SubCategoryDropdown productCategoryId={serviceCategoryId} {...children.props} />;
           },
         },
       }}

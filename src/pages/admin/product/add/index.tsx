@@ -5,6 +5,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import ProductForm from '@/features/products/components/product-form';
 import { useCreateProduct } from '@/hooks/api/product.rq';
 import { useToast } from '@/hooks/use-toast';
+import { objectToFormData } from '@/utils/form-data.utils';
 import { useNavigate } from 'react-router-dom';
 
 export default function AddProduct() {
@@ -14,8 +15,8 @@ export default function AddProduct() {
 
   const handleSubmit = async (data: any) => {
     try {
-      // const formData = objectToFormData(data);
-      await mutateAsync(data);
+      const formData = objectToFormData(data);
+      await mutateAsync(formData);
       navigate('/admin/products');
     } catch (error: any) {
       toast({

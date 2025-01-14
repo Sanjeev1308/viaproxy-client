@@ -3,14 +3,24 @@ import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import AutoFormCustomSelect from '@/components/auto-form/fields/custom-select';
 import { DependencyType } from '@/components/auto-form/types';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { concernedProductOptions, proposedItemsOptions } from '@/features/exchanges/data/submit-an-offer';
+import ProductDropdown from '@/features/dropdowns/components/product-dropdown';
+import ServiceDropdown from '@/features/dropdowns/components/service-dropdown';
+import { proposedItemsOptions } from '@/features/exchanges/data/submit-an-offer';
+import { useState } from 'react';
 import { offerFormSchema } from '../data/exchange-form-schema';
 
 export default function ExchangeOfferForm({ values, handleOnSubmit, isLoading }: any) {
+  const [proposedItem, setProposedItem] = useState(values?.proposedItem || 'service');
+
+  const handleChange = (value: any) => {
+    setProposedItem(value.proposedItem);
+  };
+
   return (
     <AutoForm
       formSchema={offerFormSchema}
       values={values}
+      onValuesChange={handleChange}
       onSubmit={handleOnSubmit}
       fieldConfig={{
         proposedItem: {
@@ -20,7 +30,10 @@ export default function ExchangeOfferForm({ values, handleOnSubmit, isLoading }:
         },
         concernedProductService: {
           renderParent({ children }: any) {
-            return <AutoFormCustomSelect selectOptions={concernedProductOptions} {...children.props} />;
+            if (proposedItem === 'service') {
+              return <ServiceDropdown {...children.props} />;
+            }
+            return <ProductDropdown {...children.props} />;
           },
         },
         grantRightToWithdraw: {

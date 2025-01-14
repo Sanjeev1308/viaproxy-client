@@ -12,7 +12,7 @@ export class AdsService extends BaseService {
 
   createAds(data: any): Promise<IAds> {
     const url = ApiURL.CREATE_ADS;
-    return this.post(url, data);
+    return this.postFormData(url, data);
   }
 
   getAllAds({ page, limit, sort, filter }: any): Promise<IAds> {

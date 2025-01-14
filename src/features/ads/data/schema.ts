@@ -8,7 +8,7 @@ const adsSchema = z.object({
   concernedProductService: z.string(),
   adsStartDate: z.string(),
   adsEndDate: z.string(),
-  geographicArea: z.string(),
+  country: z.string(),
 });
 export type Ads = z.infer<typeof adsSchema>;
 

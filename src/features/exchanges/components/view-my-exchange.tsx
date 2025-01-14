@@ -1,52 +1,15 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { MessageDialog } from '@/features/messaging/components/message-dialog';
-import { ProposalDialog } from '@/features/proposals/components/proposal-dialog';
-import { useCreateConversation, useSendMessage } from '@/hooks/api/message.rq';
 import { useOfferById } from '@/hooks/api/offer.rq';
-import { useCreateProposal } from '@/hooks/api/proposal.rq';
-import { useTypedSelector } from '@/hooks/useTypedSelector';
 import { Calendar, Clock } from 'lucide-react';
-import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-const ExchangeOfferDetailsView = () => {
+const MineExchangeOfferDetailsView = () => {
   const { id: exchangeId } = useParams();
   const { data, isLoading } = useOfferById(exchangeId || '');
-  const [isMessageDialogOpen, setMessageDialogOpen] = useState(false);
-  const [isProposalDialogOpen, setProposalDialogOpen] = useState(false);
-  const { user } = useTypedSelector((state) => state.auth);
-
-  const { mutateAsync, isLoading: isCreateConversationLoading } = useCreateConversation();
-  const { mutateAsync: mutateAsyncMessage, isLoading: isCreateMessageLoading } = useSendMessage();
-  const { mutateAsync: mutateAsyncProposal, isLoading: isCreateProposalLoading } = useCreateProposal();
-
   if (isLoading) {
     return <div className="text-center py-12 text-gray-600">Loading...</div>;
   }
-
-  const handleMessageSend = async (userId: string, message: string) => {
-    try {
-      const result = await mutateAsync({ participants: [userId, user?.id], title: data?.offer.offerTitle } as any);
-      await mutateAsyncMessage({
-        conversationId: result.data._id,
-        sender: user?.id,
-        content: message,
-      } as any);
-    } catch (error) {
-      console.log('kkk', error);
-    }
-  };
-
-  const handleProposalSend = async (message: string) => {
-    try {
-      await mutateAsyncProposal({ offer: exchangeId, proposer: user?.id, message });
-    } catch (error) {
-      console.log('kkk', error);
-    }
-  };
 
   const exchangeData = data.offer;
 
@@ -163,35 +126,11 @@ const ExchangeOfferDetailsView = () => {
                 <p className="text-gray-700 leading-relaxed">{exchangeData?.deliveryTermsDescription}</p>
               </CardContent>
             </Card>
-
-            <div className="flex gap-4">
-              <Button variant="secondary" className="w-full" onClick={() => setMessageDialogOpen(true)} disabled>
-                Connect
-              </Button>
-              <Button className="w-full" onClick={() => setProposalDialogOpen(true)}>
-                Make Proposal
-              </Button>
-            </div>
           </div>
         </div>
       </div>
-
-      <MessageDialog
-        open={isMessageDialogOpen}
-        onOpenChange={() => setMessageDialogOpen(false)}
-        userId={exchangeData.createdBy}
-        handleConfirm={handleMessageSend}
-        isLoading={isCreateConversationLoading}
-      />
-
-      <ProposalDialog
-        open={isProposalDialogOpen}
-        onOpenChange={() => setProposalDialogOpen(false)}
-        handleConfirm={handleProposalSend}
-        isLoading={isCreateProposalLoading}
-      />
     </>
   );
 };
 
-export default ExchangeOfferDetailsView;
+export default MineExchangeOfferDetailsView;

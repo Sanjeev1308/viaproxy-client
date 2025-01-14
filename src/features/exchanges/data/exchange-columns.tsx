@@ -4,8 +4,8 @@ import { DataTableRowActions } from '@/components/data-table/data-table-row-acti
 import { Badge } from '@/components/ui/badge';
 import { cn } from '@/lib/utils';
 import { ColumnDef } from '@tanstack/react-table';
-import { callTypes } from './data/data';
-import { Exchanges } from './data/schema';
+import { callTypes } from './data';
+import { Exchanges } from './schema';
 
 export const exchangeColumns = ({ handleEdit, handleView, isDelete = true }: any): ColumnDef<Exchanges>[] => [
   // {

@@ -14,15 +14,6 @@ export default function AutoFormCustomSelect({
 }: AutoFormInputComponentProps) {
   const { className = 'w-full' } = fieldProps;
 
-  //   const baseValues = (getBaseSchema(zodItem) as unknown as z.ZodEnum<any>)._def.values;
-
-  //   let values: [string, string][] = [];
-  //   if (!Array.isArray(baseValues)) {
-  //     values = Object.entries(baseValues);
-  //   } else {
-  //     values = baseValues.map((value) => [value, value]);
-  //   }
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   function findItem(value: any) {
     return selectOptions?.find((item) => item.value === value);

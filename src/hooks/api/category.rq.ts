@@ -31,6 +31,13 @@ export function useAllCategory({ page, limit, sort, filter }: any): UseQueryResu
   });
 }
 
+export function useAllSubCategoryById(id: string): UseQueryResult<any, ErrorModel> {
+  return useQuery<any, ErrorModel>({
+    queryKey: ['getAllSubCategory', id],
+    queryFn: () => CategoryService.getInstance().getAllSubCategories(id),
+  });
+}
+
 export function useCategoryById(id: string): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
     queryKey: ['getCategoryById'],

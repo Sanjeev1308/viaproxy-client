@@ -6,6 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import ServiceForm from '@/features/services/components/service-form';
 import { useServiceById, useUpdateServiceById } from '@/hooks/api/service.rq';
 import { useToast } from '@/hooks/use-toast';
+import { objectToFormData } from '@/utils/form-data.utils';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function EditService() {
@@ -17,8 +18,8 @@ export default function EditService() {
 
   const handleSubmit = async (data: any) => {
     try {
-      // const formData = objectToFormData(data);
-      await mutateAsync({ id: serviceId || '', data });
+      const formData = objectToFormData(data);
+      await mutateAsync({ id: serviceId || '', data: formData });
       navigate('/admin/services');
     } catch (error: any) {
       toast({

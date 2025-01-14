@@ -21,9 +21,9 @@ export class OfferService extends BaseService {
     return this.get(url);
   }
 
-  getAllMineOffers({ page, limit, sort, filter }: any): Promise<IOffer> {
+  getAllMineOffers(exchangeType: string, { page, limit, sort, filter }: any): Promise<IOffer> {
     const { offerTitle, proposedItem } = filter;
-    const url = ApiURL.GET_MINE_OFFERS({ page, limit, sort, offerTitle, proposedItem });
+    const url = ApiURL.GET_MINE_OFFERS(exchangeType, { page, limit, sort, offerTitle, proposedItem });
     return this.get(url);
   }
 

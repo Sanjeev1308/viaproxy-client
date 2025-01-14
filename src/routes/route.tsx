@@ -1,5 +1,7 @@
 import App from '@/App';
 import ComingSoon from '@/components/coming-soon';
+import MineExchangeOfferDetailsView from '@/features/exchanges/components/view-my-exchange';
+import ViewProposalDetails from '@/features/proposals/components/view-proposal';
 import { Ads } from '@/pages/admin/ads';
 import AddAds from '@/pages/admin/ads/add';
 import EditAds from '@/pages/admin/ads/edit';
@@ -29,17 +31,16 @@ import { Register } from '@/pages/auth/register';
 import { VerifyEmail } from '@/pages/auth/verify-email';
 import LandingPage from '@/pages/landing-page';
 import Dashboard from '@/pages/students/dashboard';
-import { Donations } from '@/pages/students/donations/find-donations';
 import { Exchanges } from '@/pages/students/exchanges/find-exchanges';
 import HowItWorks from '@/pages/students/exchanges/how-it-works';
 import { MyExchanges } from '@/pages/students/exchanges/my-exchanges';
-import MineExchangeOfferDetails from '@/pages/students/exchanges/my-exchanges/view-exchange';
 import SubmitOffer from '@/pages/students/exchanges/submit-an-offer';
 import EditExchangeOffer from '@/pages/students/exchanges/submit-an-offer/edit-exchange';
 import NewExchangeOffer from '@/pages/students/exchanges/submit-an-offer/new-exchange';
 import ExchangeDetails from '@/pages/students/exchanges/submit-an-offer/view-exchange';
 import Chats from '@/pages/students/messaging';
-import { Sales } from '@/pages/students/sales/find-sales';
+import { ProposalRecieved } from '@/pages/students/proposal/recieved';
+import { ProposalSent } from '@/pages/students/proposal/sent';
 import { Route, Routes } from 'react-router-dom';
 
 // const FallbackComponent = () => <div>Page Not Available</div>;
@@ -92,7 +93,7 @@ export default function AppRoutes() {
 
           <Route path="me">
             <Route index element={<MyExchanges />} />
-            <Route path="view/:id" element={<MineExchangeOfferDetails />} />
+            <Route path="view/:id" element={<MineExchangeOfferDetailsView />} />
             <Route path=":id" element={<EditExchangeOffer />} />
           </Route>
 
@@ -101,7 +102,7 @@ export default function AppRoutes() {
           <Route path="view/:id" element={<ExchangeDetails />} />
         </Route>
 
-        <Route path="donations">
+        {/* <Route path="donations">
           <Route index element={<Donations />} />
           <Route path="me" element={<ComingSoon />} />
         </Route>
@@ -109,6 +110,12 @@ export default function AppRoutes() {
         <Route path="sales">
           <Route index element={<Sales />} />
           <Route path="me" element={<ComingSoon />} />
+        </Route> */}
+
+        <Route path="proposals">
+          <Route path="sent" element={<ProposalSent />} />
+          <Route path="recieved" element={<ProposalRecieved />} />
+          <Route path="view/:id" element={<ViewProposalDetails />} />
         </Route>
       </Route>
 

@@ -1,4 +1,4 @@
-import { ArrowRightLeft, Book, Currency, Gift, Home, MessageCircle } from 'lucide-react';
+import { ArrowRightLeft, Book, Home, MessageCircle, Reply } from 'lucide-react';
 import { NavGroup } from '../types';
 
 export const studentRoutes: NavGroup[] = [
@@ -44,33 +44,48 @@ export const studentRoutes: NavGroup[] = [
       },
     ],
   },
+  // {
+  //   title: 'DONATIONS',
+  //   icon: Gift,
+  //   url: '',
+  //   items: [
+  //     {
+  //       title: 'FIND_DONATIONS',
+  //       url: '/student/donations',
+  //     },
+  //     {
+  //       title: 'MY_DONATIONS',
+  //       url: '/student/donations/me',
+  //     },
+  //   ],
+  // },
+  // {
+  //   title: 'SALES',
+  //   icon: Currency,
+  //   url: '',
+  //   items: [
+  //     {
+  //       title: 'FIND_SALES',
+  //       url: '/student/sales',
+  //     },
+  //     {
+  //       title: 'MY_SALES',
+  //       url: '/student/sales/me',
+  //     },
+  //   ],
+  // },
   {
-    title: 'DONATIONS',
-    icon: Gift,
+    title: 'PROPOSALS',
+    icon: Reply,
     url: '',
     items: [
       {
-        title: 'FIND_DONATIONS',
-        url: '/student/donations',
+        title: 'PROPOSALS_SENT',
+        url: '/student/proposals/sent',
       },
       {
-        title: 'MY_DONATIONS',
-        url: '/student/donations/me',
-      },
-    ],
-  },
-  {
-    title: 'SALES',
-    icon: Currency,
-    url: '',
-    items: [
-      {
-        title: 'FIND_SALES',
-        url: '/student/sales',
-      },
-      {
-        title: 'MY_SALES',
-        url: '/student/sales/me',
+        title: 'PROPOSALS_RECIEVED',
+        url: '/student/proposals/recieved',
       },
     ],
   },

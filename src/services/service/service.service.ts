@@ -12,7 +12,7 @@ export class ServiceService extends BaseService {
 
   createService(data: any): Promise<IService> {
     const url = ApiURL.CREATE_SERVICE;
-    return this.post(url, data);
+    return this.postFormData(url, data);
   }
 
   getAllServices({ page, limit, sort, filter }: any): Promise<IService> {
@@ -28,7 +28,7 @@ export class ServiceService extends BaseService {
 
   updateServiceById(id: string, data: any): Promise<IService> {
     const url = ApiURL.GET_SERVICE_BY_ID(id);
-    return this.patch(url, data);
+    return this.patchFormData(url, data);
   }
 
   deleteServiceById(id: string): Promise<IService> {

@@ -55,10 +55,13 @@ export function useAllSalesOffers({ page, limit, sort, filter }: any): UseQueryR
   });
 }
 
-export function useAllMineOffers({ page, limit, sort, filter }: any): UseQueryResult<any, ErrorModel> {
+export function useAllMineOffers(
+  exchangeType: string,
+  { page, limit, sort, filter }: any,
+): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
     queryKey: ['getAllMineOffers', page, limit, sort, filter],
-    queryFn: () => OfferService.getInstance().getAllMineOffers({ page, limit, sort, filter }),
+    queryFn: () => OfferService.getInstance().getAllMineOffers(exchangeType, { page, limit, sort, filter }),
   });
 }
 
