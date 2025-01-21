@@ -46,23 +46,13 @@ export function Login() {
   return (
     <>
       <div className="container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-        <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-          <div className="absolute inset-0 bg-indigo-950" />
-          <div className="relative z-20 flex items-center text-lg font-medium">ViaProxy</div>
-
-          <img
-            src="https://dev.viaproxy.eu/admin/assets/images/logo/login.png"
-            className="relative m-auto"
-            width={301}
-            height={60}
-            alt="Vite"
-          />
-
-          <div className="relative z-20 mt-auto">
-            <blockquote className="space-y-2">
-              <p className="text-lg">Discover how you can exchange products and services seamlessly with Viaproxy.</p>
-            </blockquote>
+        <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
+          <div className="absolute inset-0" />
+          <div className="relative z-20 flex-col flex items-center text-lg font-medium mb-10">
+            <h6>Viaproxy</h6>
+            <p>Discover how you can exchange products and services seamlessly with Viaproxy.</p>
           </div>
+          <img src="/src/assets/images/register.png" className="relative mx-auto" width={601} height={80} alt="Vite" />
         </div>
         <div className="lg:p-8">
           <div className="mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[350px]">

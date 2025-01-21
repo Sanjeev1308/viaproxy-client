@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useRegister } from '@/hooks/api/auth.rq';
 import { useToast } from '@/hooks/use-toast';
+import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { useMemo, useState } from 'react';
 import { createSearchParams, Link, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
@@ -28,9 +29,18 @@ const generateFormSchema = (role: string) => {
   const specificFields =
     role === 'student'
       ? z.object({
-          country: z.string(),
-          category: z.string(),
-          school: z.string(),
+          status: z.enum([
+            'Etudiant',
+            'Professeur',
+            'Membre du personnel',
+            'Coordinateur',
+            'Directeur',
+            'Recteur-DG ou DP',
+          ]),
+          country: z.enum(['Belgique', 'France', 'Luxembourg', 'Roumanie', 'Suisse', 'Ukraine', 'Autre']),
+          categorySchool: z.string(),
+          designationSchool: z.string(),
+          implementation: z.enum(['Cousins path', 'Letellier Boulevard', 'bamboo street 50 1080 uccle']),
         })
       : role === 'eco-citizen'
         ? z.object({
@@ -82,69 +92,68 @@ export function Register() {
 
   return (
     <div className="container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col bg-muted p-10 text-white dark:border-r lg:flex">
-        <div className="absolute inset-0 bg-indigo-950" />
-        <div className="relative z-20 flex items-center text-lg font-medium">ViaProxy</div>
-        <img
-          src="https://dev.viaproxy.eu/admin/assets/images/logo/login.png"
-          className="relative m-auto"
-          width={301}
-          height={60}
-          alt="Vite"
-        />
-        <div className="relative z-20 mt-auto">
-          <blockquote className="space-y-2">
-            <p className="text-lg">Discover how you can exchange products and services seamlessly with Viaproxy.</p>
-          </blockquote>
+      <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
+        <div className="absolute inset-0" />
+        <div className="relative z-20 flex-col flex items-center text-lg font-medium mb-10">
+          <h6>Viaproxy</h6>
+          <p>Discover how you can exchange products and services seamlessly with Viaproxy.</p>
         </div>
+        <img src="/src/assets/images/register.png" className="relative mx-auto" width={601} height={80} alt="Vite" />
       </div>
 
-      <div className="lg:p-8">
-        <div className="mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[450px]">
-          <div className="flex flex-col space-y-2 text-left">
-            <h1 className="text-2xl font-semibold tracking-tight">Create an account</h1>
-            <p className="text-sm text-muted-foreground">Enter your email and password to create an account.</p>
-          </div>
+      <ScrollArea className="h-[100vh] overflow-auto">
+        <div className="lg:p-8">
+          <div className="mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[450px]">
+            <div className="flex flex-col space-y-2 text-left">
+              <h1 className="text-2xl font-semibold tracking-tight">Create an account</h1>
+              <p className="text-sm text-muted-foreground">Enter your email and password to create an account.</p>
+            </div>
 
-          <div className="py-2">
-            <RadioGroup value={currentRole} onValueChange={setCurrentRole} className="grid grid-cols-3 gap-4">
-              {roleOptions.map((item) => (
-                <div key={item.value}>
-                  <RadioGroupItem value={item.value} id={item.value} className="peer sr-only" aria-label={item.label} />
-                  <Label
-                    htmlFor={item.value}
-                    className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                  >
-                    {item.label}
-                  </Label>
-                </div>
-              ))}
-            </RadioGroup>
-          </div>
+            <div className="py-2">
+              <RadioGroup value={currentRole} onValueChange={setCurrentRole} className="grid grid-cols-3 gap-4">
+                {roleOptions.map((item) => (
+                  <div key={item.value}>
+                    <RadioGroupItem
+                      value={item.value}
+                      id={item.value}
+                      className="peer sr-only"
+                      aria-label={item.label}
+                    />
+                    <Label
+                      htmlFor={item.value}
+                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
+                    >
+                      {item.label}
+                    </Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
 
-          <AutoForm
-            formSchema={currentFormSchema}
-            onSubmit={handleSubmit}
-            fieldConfig={{
-              password: { inputProps: { type: 'password', placeholder: '••••••••' } },
-              confirmPassword: { inputProps: { type: 'password', placeholder: '••••••••' } },
-              firstName: { inputProps: { className: 'w-[48%]' } },
-              lastName: { inputProps: { className: 'w-[48%]' } },
-            }}
-          >
-            <AutoFormSubmit className="w-full" disabled={isLoading}>
-              Register
-            </AutoFormSubmit>
-          </AutoForm>
+            <AutoForm
+              formSchema={currentFormSchema}
+              onSubmit={handleSubmit}
+              fieldConfig={{
+                password: { inputProps: { type: 'password', placeholder: '••••••••' } },
+                confirmPassword: { inputProps: { type: 'password', placeholder: '••••••••' } },
+                firstName: { inputProps: { className: 'w-[48%]' } },
+                lastName: { inputProps: { className: 'w-[48%]' } },
+              }}
+            >
+              <AutoFormSubmit className="w-full" disabled={isLoading}>
+                Register
+              </AutoFormSubmit>
+            </AutoForm>
 
-          <div className="mt-4 text-center text-sm">
-            Already have an account?{' '}
-            <Link to="/auth/login" className="underline underline-offset-4">
-              Login
-            </Link>
+            <div className="mt-4 text-center text-sm">
+              Already have an account?{' '}
+              <Link to="/auth/login" className="underline underline-offset-4">
+                Login
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
+      </ScrollArea>
     </div>
   );
 }

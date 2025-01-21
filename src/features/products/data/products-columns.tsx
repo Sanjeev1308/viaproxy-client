@@ -14,9 +14,28 @@ export const productsColumns = ({ handleEdit, handleView, isDelete = true }: any
     cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('name')}</div>,
   },
   {
+    accessorKey: 'productCategoryId',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Category" />,
+    cell: ({ row }) => {
+      const subCategory = row.original.productCategoryId;
+      return <div className="w-fit text-nowrap">{subCategory?.name || 'N/A'}</div>;
+    },
+    enableSorting: false,
+  },
+  {
+    accessorKey: 'productSubCategoryId',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Sub Category" />,
+    cell: ({ row }) => {
+      const subCategory = row.original.productSubCategoryId;
+      return <div className="w-fit text-nowrap">{subCategory?.name || 'N/A'}</div>;
+    },
+    enableSorting: false,
+  },
+  {
     accessorKey: 'description',
     header: ({ column }) => <DataTableColumnHeader column={column} title="Description" />,
     cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('description')}</div>,
+    enableSorting: false,
   },
   {
     accessorKey: 'isActive',
@@ -32,6 +51,18 @@ export const productsColumns = ({ handleEdit, handleView, isDelete = true }: any
         </div>
       );
     },
+    enableSorting: false,
+  },
+  {
+    accessorKey: 'country',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="Country" />,
+    cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('country')}</div>,
+    enableSorting: false,
+  },
+  {
+    accessorKey: 'city',
+    header: ({ column }) => <DataTableColumnHeader column={column} title="City" />,
+    cell: ({ row }) => <div className="w-fit text-nowrap">{row.getValue('city')}</div>,
     enableSorting: false,
   },
   {

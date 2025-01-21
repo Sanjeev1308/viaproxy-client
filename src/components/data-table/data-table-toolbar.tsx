@@ -64,7 +64,10 @@ export function DataTableToolbar({ table, filterFields }: DataTableToolbarProps)
           </Button>
         )}
       </div>
-      <DataTableViewOptions table={table} />
+      <div className="flex gap-2">
+        {/* <DataTableExportImport table={table} /> */}
+        <DataTableViewOptions table={table} />
+      </div>
     </div>
   );
 }
