@@ -30,13 +30,13 @@ export const ConversationList: React.FC<Props> = ({
           }`}
           onClick={() => {
             onSelectConversation(conversation._id);
-            const receiverId = conversation.participants.find((p: any) => p !== userId);
+            const receiverId = conversation.participants.find((p: any) => p._id !== userId);
             onSelectReceiver(receiverId);
           }}
         >
           <div className="flex justify-between items-center">
             <div>
-              <p className="font-medium">{conversation.participants.find((p: any) => p !== userId)}</p>
+              <p className="font-medium">{conversation.participants.find((p: any) => p._id !== userId).email}</p>
               <p className="text-sm text-gray-500 truncate">{conversation.lastMessage}</p>
             </div>
             {conversation.unreadCount[userId] > 0 && (

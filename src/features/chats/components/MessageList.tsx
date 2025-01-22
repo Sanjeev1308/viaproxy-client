@@ -13,6 +13,7 @@ interface Props {
 
 export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
   const [mobileSelectedUser, setMobileSelectedUser] = useState<any | null>(null);
+  const [receiver, setReceiver] = useState<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
 
@@ -35,7 +36,16 @@ export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
+  useEffect(() => {
+    if (messages?.length) {
+      const receiverInfo = messages[0].sender._id === userId ? messages[0].receiver : messages[0].sender;
+      setReceiver(receiverInfo);
+    }
+  }, [messages]);
+
   if (isLoading) return <div className="p-4">Loading messages...</div>;
+
+  console.log('lll', receiver);
 
   return (
     <>
@@ -56,7 +66,7 @@ export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
               {/* <AvatarFallback>{selectedUser.username}</AvatarFallback> */}
             </Avatar>
             <div>
-              <span className="col-start-2 row-span-2 text-sm font-medium lg:text-base">{conversationId}</span>
+              <span className="col-start-2 row-span-2 text-sm font-medium lg:text-base">{receiver?.email}</span>
             </div>
           </div>
         </div>
