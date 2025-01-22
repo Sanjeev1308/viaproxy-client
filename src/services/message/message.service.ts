@@ -38,4 +38,9 @@ export class MessageService extends BaseService {
     const url = ApiURL.CREATE_CONVERSATION;
     return this.post(url, data);
   }
+
+  markMessagesAsRead(conversationId: string, userId: string): Promise<any> {
+    const url = ApiURL.MARK_AS_READ(conversationId);
+    return this.put(url, { userId });
+  }
 }

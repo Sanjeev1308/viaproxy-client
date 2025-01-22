@@ -170,6 +170,7 @@ export const ApiURL = {
   GET_ALL_MESSAGES: 'messages',
   GET_CONVERSATION_BY_USER_ID: (userId: string) => `conversations/${userId}`,
   GET_MESSAGES_BY_CONVERSATION_ID: (conversationId: string) => `messages/${conversationId}`,
-  SEND_MESSAGE: 'messages',
+  SEND_MESSAGE: 'send',
   CREATE_CONVERSATION: 'conversations',
+  MARK_AS_READ: (conversationId: string) => `messages/read/${conversationId}`,
 };

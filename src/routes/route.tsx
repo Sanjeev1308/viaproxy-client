@@ -1,5 +1,6 @@
 import App from '@/App';
 import ComingSoon from '@/components/coming-soon';
+import { ChatApp } from '@/features/chats/components/Chats';
 import MineExchangeOfferDetailsView from '@/features/exchanges/components/view-my-exchange';
 import ViewProposalDetails from '@/features/proposals/components/view-proposal';
 import { Ads } from '@/pages/admin/ads';
@@ -84,7 +85,7 @@ export default function AppRoutes() {
       <Route path="/student" element={<App />}>
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="blogs" element={<ComingSoon />} />
-        <Route path="chats" element={<Chats />} />
+        <Route path="chats" element={<ChatApp />} />
 
         <Route path="exchanges">
           <Route index element={<Exchanges />} />
@@ -121,7 +122,7 @@ export default function AppRoutes() {
 
       <Route path="/admin" element={<App />}>
         <Route path="dashboard" element={<ComingSoon />} />
-        <Route path="chats" element={<Chats />} />
+        <Route path="chats" element={<ChatApp />} />
 
         <Route path="users">
           <Route index element={<Users />} />

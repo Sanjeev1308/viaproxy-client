@@ -3,15 +3,15 @@ import { ErrorModel } from '@/models/api.model';
 import { MessageService } from '@/services/message/message.service';
 import { useMutation, UseMutationResult, useQuery, UseQueryResult } from 'react-query';
 
-export function useSendMessage(): UseMutationResult<any, ErrorModel, string, unknown> {
-  return useMutation<any, ErrorModel, string, unknown>({
+export function useSendMessage(): UseMutationResult<any, ErrorModel, any, unknown> {
+  return useMutation<any, ErrorModel, any, unknown>({
     mutationKey: ['sendMessage'],
     mutationFn: (data) => MessageService.getInstance().sendMessage(data),
   });
 }
 
-export function useCreateConversation(): UseMutationResult<any, ErrorModel, string, unknown> {
-  return useMutation<any, ErrorModel, string, unknown>({
+export function useCreateConversation(): UseMutationResult<any, ErrorModel, any, unknown> {
+  return useMutation<any, ErrorModel, any, unknown>({
     mutationKey: ['createConversation'],
     mutationFn: (data) => MessageService.getInstance().createConversation(data),
   });
@@ -28,7 +28,7 @@ export function useGetMessagesByConversationId(conversationId: string): UseQuery
 export function useGetConversationByUserId(userId: string): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
     queryKey: ['getConversationByUserId', userId],
-    queryFn: () => MessageService.getInstance().getMessagesByConversationId(userId),
+    queryFn: () => MessageService.getInstance().getConversationsByUserId(userId),
     enabled: !!userId,
   });
 }
@@ -44,5 +44,12 @@ export function useGetAllMessages(): UseQueryResult<any, ErrorModel> {
   return useQuery<any, ErrorModel>({
     queryKey: ['getAllMessages'],
     queryFn: () => MessageService.getInstance().getAllMessages(),
+  });
+}
+
+export function useMarkAsRead(): UseMutationResult<any, ErrorModel, any, unknown> {
+  return useMutation<any, ErrorModel, any, unknown>({
+    mutationKey: ['markAsRead'],
+    mutationFn: ({ conversationId, userId }) => MessageService.getInstance().markMessagesAsRead(conversationId, userId),
   });
 }

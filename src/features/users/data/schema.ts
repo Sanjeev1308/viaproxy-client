@@ -16,7 +16,7 @@ export const filterFields = [
   {
     label: 'Email',
     value: 'email',
-    placeholder: 'Search by email...',
+    placeholder: 'Search by first name, last name or email...',
   },
   {
     label: 'Role',
