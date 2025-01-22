@@ -81,10 +81,13 @@ export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
 
       <div className="flex-1 overflow-y-auto p-4">
         {messages?.map((message: any) => (
-          <div key={message._id} className={`mb-4 flex ${message.sender === userId ? 'justify-end' : 'justify-start'}`}>
+          <div
+            key={message._id}
+            className={`mb-4 flex ${message.sender._id === userId ? 'justify-end' : 'justify-start'}`}
+          >
             <div
               className={`max-w-[70%] rounded-lg p-3 ${
-                message.sender === userId ? 'bg-blue-500 text-white' : 'bg-gray-200'
+                message.sender._id === userId ? 'bg-blue-500 text-white' : 'bg-gray-200'
               }`}
             >
               <p>{message.content}</p>
