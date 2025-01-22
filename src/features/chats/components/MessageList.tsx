@@ -9,10 +9,10 @@ import { useQueryClient } from 'react-query';
 interface Props {
   conversationId: string;
   userId: string;
+  handleBackToList: () => void;
 }
 
-export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
-  const [mobileSelectedUser, setMobileSelectedUser] = useState<any | null>(null);
+export const MessageList: React.FC<Props> = ({ conversationId, userId, handleBackToList }) => {
   const [receiver, setReceiver] = useState<any>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const queryClient = useQueryClient();
@@ -45,19 +45,12 @@ export const MessageList: React.FC<Props> = ({ conversationId, userId }) => {
 
   if (isLoading) return <div className="p-4">Loading messages...</div>;
 
-  console.log('lll', receiver);
-
   return (
     <>
       <div className="mb-1 flex flex-none justify-between rounded-t-md bg-secondary p-4 shadow-lg">
         {/* Left */}
         <div className="flex gap-3">
-          <Button
-            size="icon"
-            variant="ghost"
-            className="-ml-2 h-full sm:hidden"
-            onClick={() => setMobileSelectedUser(null)}
-          >
+          <Button size="icon" variant="ghost" className="-ml-2 h-full sm:hidden" onClick={handleBackToList}>
             <ArrowLeft />
           </Button>
           <div className="flex items-center gap-2 lg:gap-4">

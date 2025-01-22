@@ -2,8 +2,10 @@
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import ServicesGrid from '@/features/landing-page/components/register-middle';
 import { useRegister } from '@/hooks/api/auth.rq';
 import { useToast } from '@/hooks/use-toast';
+import { useQueryParams } from '@/hooks/useQueryParams';
 import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { useMemo, useState } from 'react';
 import { createSearchParams, Link, useNavigate } from 'react-router-dom';
@@ -70,6 +72,7 @@ export function Register() {
   const { mutateAsync, isLoading } = useRegister();
   const [currentRole, setCurrentRole] = useState('student');
   const { toast } = useToast();
+  const queryParams = useQueryParams();
 
   // Use useMemo to avoid recalculating form schema on every render
   const currentFormSchema = useMemo(() => generateFormSchema(currentRole), [currentRole]);
@@ -89,6 +92,12 @@ export function Register() {
       });
     }
   };
+
+  console.log('llll', queryParams);
+
+  if (!Object.keys(queryParams).length) {
+    return <ServicesGrid />;
+  }
 
   return (
     <div className="container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">

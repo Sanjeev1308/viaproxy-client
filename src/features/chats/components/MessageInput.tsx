@@ -39,7 +39,7 @@ export const MessageInput: React.FC<Props> = ({ conversationId, userId, receiver
             onChange={(event) => setNewMessage(event.target.value)}
           />
         </label>
-        <Button variant="ghost" size="icon" className="hidden sm:inline-flex" onClick={handleSubmit}>
+        <Button variant="ghost" size="icon" className="inline-flex" onClick={handleSubmit}>
           <Send size={20} />
         </Button>
       </div>
