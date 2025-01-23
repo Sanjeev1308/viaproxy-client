@@ -3,12 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Footer from './footer';
-import Header from './header';
 
 const ServiceCard = ({ title, description, disabled, onLearnMore }: any) => (
   <div className="bg-white rounded-lg shadow-md overflow-hidden">
-    <div className="bg-lime-500 p-4">
+    <div className="bg-green-500 p-4">
       <h2 className="text-white text-xl font-bold text-center">{title}</h2>
     </div>
     <div className="p-6 flex flex-col items-center">
@@ -16,7 +14,7 @@ const ServiceCard = ({ title, description, disabled, onLearnMore }: any) => (
       <Button
         disabled={disabled}
         onClick={onLearnMore}
-        className="bg-lime-500 text-white px-6 py-2 rounded-full hover:bg-lime-600 transition-colors flex items-center"
+        className="bg-green-500 text-white px-6 py-2 rounded-full hover:bg-lime-600 transition-colors flex items-center"
       >
         Learn more
         <svg className="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -126,7 +124,6 @@ const ServicesGrid = () => {
 
   return (
     <>
-      <Header />
       <div className="max-w-7xl mx-auto p-6">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((service, index) => (
@@ -134,7 +131,6 @@ const ServicesGrid = () => {
           ))}
         </div>
       </div>
-      <Footer />
 
       {isModalOpen && (
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>

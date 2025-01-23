@@ -65,7 +65,7 @@ const LatestExchanges: React.FC = () => {
                 <p className="text-xs text-gray-500">End Date: {item.endDate}</p>
               </CardContent>
               <CardFooter>
-                <Button>See</Button>
+                <Button className="w-full">See</Button>
               </CardFooter>
             </Card>
           ))}

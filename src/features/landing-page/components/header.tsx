@@ -37,8 +37,8 @@ const Header: React.FC = () => {
           <Link to="/auth/login" className="hover:text-gray-300">
             Login
           </Link>
-          <Link to="/auth/register" className="hover:text-gray-300">
-            Register
+          <Link to="/auth/register?role=student" className="hover:text-gray-300">
+            Student Register
           </Link>
           <Button variant="ghost" className="block md:hidden" aria-label="Open menu">
             <Menu size={24} />

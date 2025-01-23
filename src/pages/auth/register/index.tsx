@@ -1,14 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import AutoForm, { AutoFormSubmit } from '@/components/auto-form';
-import { Label } from '@/components/ui/label';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import Footer from '@/features/landing-page/components/footer';
+import Header from '@/features/landing-page/components/header';
 import ServicesGrid from '@/features/landing-page/components/register-middle';
 import { useRegister } from '@/hooks/api/auth.rq';
 import { useToast } from '@/hooks/use-toast';
 import { useQueryParams } from '@/hooks/useQueryParams';
-import { ScrollArea } from '@radix-ui/react-scroll-area';
 import { useMemo, useState } from 'react';
-import { createSearchParams, Link, useNavigate } from 'react-router-dom';
+import { createSearchParams, useNavigate } from 'react-router-dom';
 import * as z from 'zod';
 
 // Function to generate form schema based on the role
@@ -71,6 +72,7 @@ export function Register() {
   const navigate = useNavigate();
   const { mutateAsync, isLoading } = useRegister();
   const [currentRole, setCurrentRole] = useState('student');
+  const [isInterseted, setIsInterseted] = useState(false);
   const { toast } = useToast();
   const queryParams = useQueryParams();
 
@@ -93,76 +95,70 @@ export function Register() {
     }
   };
 
-  console.log('llll', queryParams);
-
   if (!Object.keys(queryParams).length) {
     return <ServicesGrid />;
   }
 
   return (
-    <div className="container relative grid h-svh flex-col items-center justify-center lg:max-w-none lg:grid-cols-2 lg:px-0">
-      <div className="relative hidden h-full flex-col bg-muted p-10 dark:border-r lg:flex">
-        <div className="absolute inset-0" />
-        <div className="relative z-20 flex-col flex items-center text-lg font-medium mb-10">
-          <h6>Viaproxy</h6>
-          <p>Discover how you can exchange products and services seamlessly with Viaproxy.</p>
-        </div>
-        <img src="/src/assets/images/register.png" className="relative mx-auto" width={601} height={80} alt="Vite" />
-      </div>
-
-      <ScrollArea className="h-[100vh] overflow-auto">
-        <div className="lg:p-8">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-2 sm:w-[450px]">
-            <div className="flex flex-col space-y-2 text-left">
-              <h1 className="text-2xl font-semibold tracking-tight">Create an account</h1>
-              <p className="text-sm text-muted-foreground">Enter your email and password to create an account.</p>
+    <>
+      <Header />
+      <div className="flex flex-col gap-2 max-w-2xl mx-auto p-6 space-y-8">
+        <div className="">
+          <div className="text-center flex flex-col gap-2">
+            <div>
+              <h1 className="text-4xl font-bold">How does it work?</h1>
             </div>
 
-            <div className="py-2">
-              <RadioGroup value={currentRole} onValueChange={setCurrentRole} className="grid grid-cols-3 gap-4">
-                {roleOptions.map((item) => (
-                  <div key={item.value}>
-                    <RadioGroupItem
-                      value={item.value}
-                      id={item.value}
-                      className="peer sr-only"
-                      aria-label={item.label}
-                    />
-                    <Label
-                      htmlFor={item.value}
-                      className="flex flex-col items-center justify-between rounded-md border-2 border-muted bg-transparent p-4 hover:bg-accent hover:text-accent-foreground peer-data-[state=checked]:border-primary [&:has([data-state=checked])]:border-primary"
-                    >
-                      {item.label}
-                    </Label>
-                  </div>
-                ))}
-              </RadioGroup>
+            <div>
+              <h2 className="text-xl font-bold">Join the Campus Ambassadors Club</h2>
+              <p className="text-md text-gray-600 mt-2">Register on the site and take advantage of the good deals!</p>
             </div>
 
-            <AutoForm
-              formSchema={currentFormSchema}
-              onSubmit={handleSubmit}
-              fieldConfig={{
-                password: { inputProps: { type: 'password', placeholder: '••••••••' } },
-                confirmPassword: { inputProps: { type: 'password', placeholder: '••••••••' } },
-                firstName: { inputProps: { className: 'w-[48%]' } },
-                lastName: { inputProps: { className: 'w-[48%]' } },
-              }}
-            >
-              <AutoFormSubmit className="w-full" disabled={isLoading}>
-                Register
-              </AutoFormSubmit>
-            </AutoForm>
+            <div>
+              <h2 className="text-xl font-bold">Save smart by making the most of your surpluses</h2>
+              <p className="text-md text-gray-600 mt-2">Trade-Sell your products & services</p>
+            </div>
 
-            <div className="mt-4 text-center text-sm">
-              Already have an account?{' '}
-              <Link to="/auth/login" className="underline underline-offset-4">
-                Login
-              </Link>
+            <div>
+              <h2 className="text-xl font-bold">Choose the opportunity and carry out your projects</h2>
+              <p className="text-md text-gray-600 mt-2">Strengthen your network, because your talents are valuable.</p>
             </div>
           </div>
+
+          <div className="flex justify-center space-x-4 mt-2">
+            <Button variant="outline" onClick={() => setIsInterseted(false)}>
+              No thanks
+            </Button>
+            <Button onClick={() => setIsInterseted(true)}>Interested</Button>
+          </div>
         </div>
-      </ScrollArea>
-    </div>
+
+        {isInterseted && (
+          <Card>
+            <CardHeader>
+              <CardTitle>Create Student account</CardTitle>
+            </CardHeader>
+
+            <CardContent>
+              <AutoForm
+                formSchema={currentFormSchema}
+                onSubmit={handleSubmit}
+                fieldConfig={{
+                  password: { inputProps: { type: 'password', placeholder: '••••••••' } },
+                  confirmPassword: { inputProps: { type: 'password', placeholder: '••••••••' } },
+                  firstName: { inputProps: { className: 'w-[48%]' } },
+                  lastName: { inputProps: { className: 'w-[48%]' } },
+                }}
+              >
+                <AutoFormSubmit className="w-full" disabled={isLoading}>
+                  Register
+                </AutoFormSubmit>
+              </AutoForm>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+      <Footer />
+    </>
   );
 }
